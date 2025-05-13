@@ -1,94 +1,75 @@
 /* Genel Sayfa Ayarları */
 body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #121212;
-    color: #fff;
-    text-align: center;
-  }
-  
-  /* Sayfa İçeriği */
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Başlık: Trio */
-  .game-title {
-    font-size: 64px;
-    background: linear-gradient(45deg, #ff4757, #ffa502, #1e90ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #121212;
+  color: #fff;
+  text-align: center;
+}
+
+/* Sayfa İçeriği */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Başlık: Trio */
+.game-title {
+  font-size: 64px;
+  background: linear-gradient(45deg, #ff4757, #ffa502, #1e90ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  margin-bottom: 20px;
+  animation: titleGlow 2s ease-in-out infinite alternate;
+  font-family: 'Verdana', sans-serif;
+  letter-spacing: 4px;
+  text-align: center;
+}
+
+/* Başlık Animasyonu */
+@keyframes titleGlow {
+  0% {
     text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-    margin-bottom: 20px;
-    animation: titleGlow 2s ease-in-out infinite alternate;
-    font-family: 'Verdana', sans-serif;
-    letter-spacing: 4px;
-    text-align: center;
   }
-  
-  /* Başlık Animasyonu */
-  @keyframes titleGlow {
-    0% {
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-    }
-    100% {
-      text-shadow: 0 0 20px rgba(255,71,87,0.8), 0 0 30px rgba(255,165,2,0.6);
-    }
+  100% {
+    text-shadow: 0 0 20px rgba(255,71,87,0.8), 0 0 30px rgba(255,165,2,0.6);
   }
-  
-  /* Oyun Görseli */
-  .game-image {
-    width: 100%;
-    border-radius: 12px;
-    margin-bottom: 20px;
-  }
-  
-  /* Açıklamalar */
-  .description, .how-to-play {
-    margin-bottom: 20px;
-  }
-  
-  .description p, .how-to-play ul {
-    font-size: 18px;
-    line-height: 1.5;
-  }
-  
-  /* Liste Stil */
-  .how-to-play ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .how-to-play li {
-    margin: 8px 0;
-  }
-  
-  /* Butonlar */
-  .buttons button {
-    background: linear-gradient(45deg, #ff4757, #e84118);
-    border: none;
-    padding: 14px 28px;
-    color: white;
-    font-size: 20px;
-    border-radius: 50px;
-    margin: 12px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    transition: all 0.3s ease;
-    letter-spacing: 1px;
-  }
-  
-  /* Buton Hover Efekti */
-  .buttons button:hover {
-    transform: scale(1.05);
-    background: linear-gradient(45deg, #e84118, #ff4757);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.6);
-  }
-  
+}
+
+/* Oyun Görseli */
+.game-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+/* Açıklamalar */
+.description, .how-to-play {
+  margin-bottom: 20px;
+}
+
+.description p, .how-to-play ul {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Liste Stil */
+.how-to-play ul {
+  list-style: none;
+  padding: 0;
+}
+
+.how-to-play li {
+  margin: 8px 0;
+}
+
+/* Bu*
