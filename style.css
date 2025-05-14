@@ -1,75 +1,100 @@
-/* Genel Sayfa Ayarları */
+/* Genel Ayarlar */
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #121212;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: #fff;
   text-align: center;
 }
 
-/* Sayfa İçeriği */
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* Header Başlık */
+header {
+  padding: 30px 0;
 }
 
-/* Başlık: Trio */
 .game-title {
-  font-size: 64px;
-  background: linear-gradient(45deg, #ff4757, #ffa502, #1e90ff);
+  font-size: 72px;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b, #ffc107);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-  margin-bottom: 20px;
-  animation: titleGlow 2s ease-in-out infinite alternate;
-  font-family: 'Verdana', sans-serif;
-  letter-spacing: 4px;
-  text-align: center;
+  text-shadow: 0 0 20px rgba(0,0,0,0.6);
+  margin: 0;
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
-/* Başlık Animasyonu */
-@keyframes titleGlow {
-  0% {
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-  }
-  100% {
-    text-shadow: 0 0 20px rgba(255,71,87,0.8), 0 0 30px rgba(255,165,2,0.6);
-  }
+@keyframes glow {
+  0% { text-shadow: 0 0 20px #ff416c; }
+  100% { text-shadow: 0 0 40px #ff4b2b, 0 0 60px #ffc107; }
 }
 
-/* Oyun Görseli */
+/* İçerik */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .game-image {
   width: 100%;
-  max-width: 400px;
-  border-radius: 12px;
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  margin-bottom: 30px;
+}
+
+/* Bölümler */
+.description p {
+  font-size: 20px;
+  line-height: 1.6;
   margin-bottom: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
 }
 
-/* Açıklamalar */
-.description, .how-to-play {
-  margin-bottom: 20px;
+.how-to-play {
+  margin: 40px 0;
 }
 
-.description p, .how-to-play ul {
-  font-size: 18px;
-  line-height: 1.5;
+.how-to-play h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #ffca28;
 }
 
-/* Liste Stil */
 .how-to-play ul {
   list-style: none;
   padding: 0;
+  font-size: 18px;
 }
 
 .how-to-play li {
-  margin: 8px 0;
+  margin: 10px 0;
 }
 
-/* Bu*
+/* Butonlar */
+.buttons {
+  margin: 30px 0;
+}
+
+.buttons button {
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  border: none;
+  padding: 16px 32px;
+  font-size: 20px;
+  color: #fff;
+  border-radius: 50px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.buttons button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+/* Footer */
+footer {
+  margin-top: 60px;
+  padding: 20px;
+  font-size: 14px;
+  color: #ccc;
+}
