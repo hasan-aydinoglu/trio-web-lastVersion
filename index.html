@@ -2,18 +2,17 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Trio | Sayı Eşleştirme Oyunu</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <h1 class="game-title">Trio</h1>
-  </header>
+  <!-- Üst köşeye yerleşmiş görsel -->
+  <img src="trio-game.jpg" alt="Trio Oyun Görseli" class="game-image">
 
   <div class="container">
-    <img src="trio-game.jpg" alt="Trio Oyun Görseli" class="game-image">
+    <h1 class="game-title">Trio</h1>
 
     <section class="description">
       <p>Trio, eğlenceli ve hızlı bir sayı eşleştirme oyunudur. En çok üçlü yapabilen kazanır!</p>
@@ -29,8 +28,8 @@
     </section>
 
     <div class="buttons">
-      <button>Hemen Oyna</button>
-      <button>Üye Ol</button>
+      <button onclick="playGame()">Hemen Oyna</button>
+      <button onclick="register()">Üye Ol</button>
     </div>
   </div>
 

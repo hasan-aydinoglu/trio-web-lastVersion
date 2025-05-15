@@ -1,10 +1,7 @@
-function startGame() {
-    alert("Oyun başlıyor!");
-    // Buraya oyun ekranına yönlendirme ekleyebilirsin.
-  }
-  
-  function register() {
-    alert("Üyelik sayfasına yönlendiriliyorsunuz.");
-    // Üyelik sayfasına yönlendirme buraya eklenebilir.
-  }
-  
+function playGame() {
+  alert("Oyun başlatılıyor... Hazır mısın?");
+}
+
+function register() {
+  alert("Üyelik işlemi başlatılıyor...");
+}
