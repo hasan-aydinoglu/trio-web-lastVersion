@@ -1,7 +1,11 @@
 function playGame() {
-  alert("Oyun başlatılıyor... Hazır mısın?");
+  alert("Oyun başlıyor!");
 }
 
 function register() {
-  alert("Üyelik işlemi başlatılıyor...");
+  alert("Üyelik sayfasına yönlendiriliyorsunuz.");
+}
+
+function howToPlay() {
+  window.location.href = "howtoplay.html";
 }
