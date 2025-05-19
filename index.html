@@ -2,31 +2,30 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trio | Sayı Eşleştirme Oyunu</title>
+  <title>Trio Design</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <img src="trio-game.jpg" alt="Trio Oyun Görseli" class="game-image">
+  <div class="hero">
+    <div class="overlay">
+      <nav class="navbar">
+        <h2>Trio</h2>
+        <div class="menu-buttons">
+          <button onclick="window.location.href='howtoplay.html'">Nasıl Oynanır?</button>
+          <button onclick="window.location.href='register.html'">Üye Ol</button>
+        </div>
+      </nav>
 
-  <div class="container">
-    <h1 class="game-title">Trio</h1>
+      <div class="content">
+        <h1> <span></span></h1>
+        <p>Kendinizi ve çocuklarınızı dijital dünyadan biraz da olsa uzaklaştırıp <strong>Trio</strong> ile sosyalleşin.<br><br>
+        TRIO aritmetik; aileniz, çocuklarınız veya arkadaşlarınız ile birlikte heyecan verici zaman geçirmenizi sağlayacak bir oyun.<br><br>
+        Çocuklarınızı sosyalleştirecek, matematiğini geliştirecek aynı zamanda hem sizi hem de çocuklarınızı elektronik cihazlardan uzaklaştıracak bir oyun. Kimin daha zeki ve hızlı olduğunu kanıtlayın.</p>
+      </div>
 
-    <section class="description">
-      <p>Trio, eğlenceli ve hızlı bir sayı eşleştirme oyunudur. En çok üçlü yapabilen kazanır!</p>
-    </section>
-
-    <div class="buttons">
-      <button onclick="playGame()">Hemen Oyna</button>
-      <button onclick="location.href='howtoplay.html'">Nasıl Oynanır</button>
     </div>
   </div>
 
-  <footer>
-    <p>© 2025 Trio Oyunu</p>
-  </footer>
-
-  <script src="app.js"></script>
 </body>
 </html>
