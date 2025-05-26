@@ -126,3 +126,44 @@ body {
 .signup-text a:hover {
   text-decoration: underline;
 }
+
+/* Sosyal Giriş Butonları */
+
+.or-text {
+  color: #ddd;
+  margin: 14px 0 10px;
+  font-size: 14px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social-btn i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.social-btn:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+.google {
+  border-color: #db4437;
+}
+
+.facebook {
+  border-color: #1877f2;
+}
