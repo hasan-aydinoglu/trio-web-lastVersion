@@ -39,15 +39,31 @@ body {
     color: #ddd;
   }
   
-  .back-button {
-    display: inline-block;
-    margin-top: 50px;
-    padding: 15px 30px;
-    background-color: #2c3e50;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-  }
+  /* Alt kısımdaki back button */
+/* Sağ üst köşe home ikonu */
+.home-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  text-decoration: none;
+  color: #f1f1f1;
+  background: rgba(44, 62, 80, 0.7);
+  padding: 10px 12px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.home-icon:hover {
+  background: rgba(52, 73, 94, 0.9);
+  transform: scale(1.1);
+  color: #fff;
+}
+
+
+  
   
   .game-board {
     display: grid;
@@ -97,6 +113,42 @@ body {
     font-weight: bold;
     box-shadow: 0 1px 3px rgba(0,0,0,0.7);
   }
+
+  .eng-button {
+    position: fixed;
+    top: 20px;
+    right: 140px;
+    background-color: rgba(44, 62, 80, 0.85);
+    color: #ecf0f1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.7);
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+  
+  .eng-button:hover {
+    background-color: rgba(52, 152, 219, 0.95);
+    transform: scale(1.05);
+  }
+  
+  .home-icon {
+    position: fixed;
+    top: 20px;
+    right: 80px;
+    z-index: 100;
+  }
+  
+  .home-icon svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .home-icon:hover svg {
+    transform: scale(1.1);
+  }
+  
   
   /* TRIO harfleri renkli */
   .cell.t { background-color: #ff4757; }
