@@ -2,104 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>How to Play</title>
-  <link rel="stylesheet" href="howtoplay.css">
-  <style>
-    .lang-button {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #3498db;
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-      transition: background-color 0.3s;
-      z-index: 100;
-    }
-    .lang-button:hover {
-      background-color: #2980b9;
-    }
-  </style>
+  <title>Trio Design</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-  <div class="container">
 
-    <!-- TR butonu -->
-    <a href="howtoplay-tr.html" class="lang-button">TR</a>
+  <div class="hero">
+    <div class="overlay">
+      <nav class="navbar">
+        <h2>Trio</h2>
+        <div class="menu-buttons">
+          <button onclick="window.location.href='howtoplay.html'">How to Play?</button>
+          <button onclick="window.location.href='register.html'">Sign Up</button>
+          <button onclick="window.location.href='aboutus.html'">About Us</button>
+          <button class="buy-btn" onclick="window.location.href='buy.html'">
+            <i class="fas fa-shopping-cart"></i> Buy to Trio
+          </button>
+        </div>
+      </nav>
 
-    <h1>TRIO - Instructions</h1>
+      <div class="login-container">
+        <h1>Login to Trio</h1>
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button class="login-btn">Login</button>
+        <a href="#" class="forgot">Forgot Password?</a>
+        <p class="signup-text">Don't have an account? <a href="register.html">Sign Up</a></p>
 
-    <div class="instructions">
-      <p>Trio consists of 49 square colourful cards featuring the numbers from 1 to 9 as well as of 50 round blue cards featuring the numbers from 1 to 50. The colours are of no significance.</p>
+        <div class="or-text">Or</div>
+        <button class="social-btn google"><i class="fab fa-google"></i> Sign in with Google</button>
+        <button class="social-btn facebook"><i class="fab fa-facebook-f"></i> Sign in with Facebook</button>
+      </div>
+
     </div>
-
-    <div class="game-board">
-      <!-- 7x7 tablo -->
-      <div class="cell orange">3</div><div class="cell pink">7</div><div class="cell red">3</div><div class="cell purple">5</div><div class="cell orange">8</div><div class="cell pink">4</div><div class="cell orange">9</div>
-      <div class="cell purple">5</div><div class="cell orange">1</div><div class="cell pink">8</div><div class="cell red">6</div><div class="cell orange">5</div><div class="cell pink">2</div><div class="cell orange">7</div>
-      <div class="cell pink">8</div><div class="cell red">6</div><div class="cell purple">2</div><div class="cell orange">4</div><div class="cell pink">9</div><div class="cell red">1</div><div class="cell orange">9</div>
-      <div class="cell purple">2</div><div class="cell orange">6</div><div class="cell pink">4</div><div class="cell red">7</div><div class="cell orange">5</div><div class="cell purple">5</div><div class="cell pink">3</div>
-      <div class="cell orange">7</div><div class="cell pink">4</div><div class="cell red">3</div><div class="cell purple">2</div><div class="cell orange">1</div><div class="cell pink">6</div><div class="cell orange">3</div>
-      <div class="cell purple">2</div><div class="cell orange">1</div><div class="cell pink">4</div><div class="cell red">8</div><div class="cell orange">3</div><div class="cell pink">9</div><div class="cell purple">5</div>
-      <div class="cell orange">1</div><div class="cell pink">8</div><div class="cell red">6</div><div class="cell purple">7</div><div class="cell orange">2</div><div class="cell pink">4</div><div class="cell orange">6</div>
-    </div>
-
-    <div class="instructions">
-      <h2>Preparing the game</h2>
-      <p>The square cards are placed face up in a square of 7 by 7 cards.</p>
-
-      <p>The round cards remain face down in the box. The first player takes a blue card from the box and places it face up on the table, where it is clearly visible to all players.</p>
-
-      <h2>How to play</h2>
-      <p>Now all players try to think of a calculation that results in the number on the blue card. The calculation must be formed with numbers that appear on three neighbouring square cards which are aligned either horizontally, vertically or diagonally. The mathematical rule such as "multiplication or division of the first cards, then addition or subtraction of the third card" must be taken into consideration.</p>
-
-      <p>As soon as a player spots a correct sequence they shout "Trio!" and must then immediately demonstrate their solution. If it is correct, they add the blue card to their stack. If it is incorrect they either forfeit the round (with two players) or the round continues until one of the remaining players finds a solution.</p>
-
-      <p>The player who acquires most blue cards wins the game.</p>
-    </div>
-
-    <div class="mini-board">
-      <!-- 1. satır -->
-      <div class="cell pink">7</div>
-      <div class="cell orange">.</div>
-      <div class="cell pink">8</div>
-      <div class="cell orange">-</div>
-      <div class="round">49</div>
-
-      <!-- 2. satır -->
-      <div class="cell blue">11</div>
-      <div class="cell orange">=</div>
-      <div class="cell pink">5</div>
-      <div class="cell orange">.</div>
-      <div class="cell pink">2</div>
-      <div class="cell orange">+</div>
-      <div class="cell pink">1</div>
-
-      <!-- 3. satır (TRIO) -->
-      <div class="cell orange">T</div>
-      <div class="cell orange">R</div>
-      <div class="cell orange">I</div>
-      <div class="cell orange">O</div>
-
-      <!-- 4. satır -->
-      <div class="round">27</div>
-      <div class="cell orange">=</div>
-      <div class="cell red">4</div>
-      <div class="cell orange">.</div>
-      <div class="cell pink">7</div>
-      <div class="cell orange">-</div>
-      <div class="cell pink">1</div>
-    </div>
-
-    <a href="index.html" class="home-icon" title="Back to Home">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#ffffff" viewBox="0 0 24 24">
-        <path d="M12 3l8 8h-3v7h-4v-5h-2v5H7v-7H4z"/>
-      </svg>
-    </a>
-
   </div>
+
 </body>
 </html>

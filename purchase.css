@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: url("images/background.png") no-repeat center center/cover;
+  }
+  
+  .purchase-hero {
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    padding: 30px 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .purchase-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .purchase-navbar h2 {
+    color: #fff;
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+  
+  .purchase-buttons button {
+    background: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    margin-left: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .purchase-buttons button:hover {
+    background: #27ae60;
+  }
+  
+  .products-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+  }
+  
+  .product-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    color: #fff;
+    width: 260px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+  
+  .product-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .product-card h3 {
+    margin: 10px 0;
+    font-size: 22px;
+  }
+  
+  .product-card p {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 18px;
+  }
+  
+  .add-cart-btn {
+    background: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: 100%;
+  }
+  
+  .add-cart-btn:hover {
+    background: #27ae60;
+  }
+  
