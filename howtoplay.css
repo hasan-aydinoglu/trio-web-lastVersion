@@ -3,32 +3,81 @@ body {
   font-family: 'Poppins', sans-serif;
   color: #f1f1f1;
   text-align: center;
-  background: url('images/background2.png') no-repeat center center fixed;
+  background: url('images/trioabout.png') no-repeat center center fixed;
   background-size: cover;
+  backdrop-filter: blur(4px);
 }
 
 .container {
   max-width: 1000px;
   margin: 50px auto;
-  padding: 20px;
+  padding: 30px;
   border-radius: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.6);
+}
+
+.top-buttons {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+}
+
+.lang-button, .tr-button {
+  background-color: rgba(44, 62, 80, 0.85);
+  color: #ecf0f1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.7);
+  transition: all 0.3s ease;
+}
+
+.lang-button:hover, .tr-button:hover {
+  background-color: rgba(52, 152, 219, 0.95);
+  transform: scale(1.05);
+}
+
+.home-icon {
+  font-size: 30px;
+  text-decoration: none;
+  color: #f1f1f1;
+  background: rgba(44, 62, 80, 0.7);
+  padding: 10px 12px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-icon:hover {
+  background: rgba(52, 73, 94, 0.9);
+  transform: scale(1.1);
+}
+
+.home-icon svg {
+  transition: transform 0.3s ease;
+}
+
+.home-icon:hover svg {
+  transform: scale(1.1);
 }
 
 h1 {
   font-size: 42px;
   margin-bottom: 20px;
-  color: #dcdcdc;
-
-
-
 }
 
 h2 {
   font-size: 28px;
   margin-top: 30px;
-  color: #dcdcdc;
-
-
 }
 
 p {
@@ -36,34 +85,7 @@ p {
   text-align: left;
   line-height: 1.6;
   margin: 20px 0;
-  color: #ddd;
 }
-
-/* Alt kısımdaki back button */
-/* Sağ üst köşe home ikonu */
-.home-icon {
-position: fixed;
-top: 20px;
-right: 20px;
-font-size: 30px;
-text-decoration: none;
-color: #f1f1f1;
-background: rgba(44, 62, 80, 0.7);
-padding: 10px 12px;
-border-radius: 50%;
-box-shadow: 0 2px 6px rgba(0,0,0,0.6);
-transition: all 0.3s ease;
-z-index: 1000;
-}
-
-.home-icon:hover {
-background: rgba(52, 73, 94, 0.9);
-transform: scale(1.1);
-color: #fff;
-}
-
-
-
 
 .game-board {
   display: grid;
@@ -113,45 +135,3 @@ color: #fff;
   font-weight: bold;
   box-shadow: 0 1px 3px rgba(0,0,0,0.7);
 }
-
-.eng-button {
-  position: fixed;
-  top: 20px;
-  right: 140px;
-  background-color: rgba(44, 62, 80, 0.85);
-  color: #ecf0f1;
-  padding: 12px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.7);
-  transition: all 0.3s ease;
-  z-index: 100;
-}
-
-.eng-button:hover {
-  background-color: rgba(52, 152, 219, 0.95);
-  transform: scale(1.05);
-}
-
-.home-icon {
-  position: fixed;
-  top: 20px;
-  right: 80px;
-  z-index: 100;
-}
-
-.home-icon svg {
-  transition: transform 0.3s ease;
-}
-
-.home-icon:hover svg {
-  transform: scale(1.1);
-}
-
-
-/* TRIO harfleri renkli */
-.cell.t { background-color: #ff4757; }
-.cell.r { background-color: #ffa502; }
-.cell.i { background-color: #2ed573; }
-.cell.o { background-color: #1e90ff; }

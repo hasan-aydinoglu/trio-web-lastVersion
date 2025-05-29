@@ -1,50 +1,48 @@
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    color: #f1f1f1;
-    text-align: center;
-    background: url('images/background3.png') no-repeat center center fixed;
-    background-size: cover;
-  }
-  
-  .container {
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 20px;
-    border-radius: 16px;
-  }
-  
-  h1 {
-    font-size: 42px;
-    margin-bottom: 20px;
-    color: #dcdcdc;
-  
-  
-  
-  }
-  
-  h2 {
-    font-size: 28px;
-    margin-top: 30px;
-    color: #dcdcdc;
-  
-  
-  }
-  
-  p {
-    font-size: 18px;
-    text-align: left;
-    line-height: 1.6;
-    margin: 20px 0;
-    color: #ddd;
-  }
-  
-  /* Alt kısımdaki back button */
-/* Sağ üst köşe home ikonu */
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #f1f1f1;
+  text-align: center;
+  background: url('images/trioabout.png') no-repeat center center fixed;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.6);
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  color: #fdfdfd;
+}
+
+h2 {
+  font-size: 28px;
+  margin-top: 30px;
+  color: #fdfdfd;
+}
+
+p {
+  font-size: 18px;
+  text-align: left;
+  line-height: 1.6;
+  margin: 20px 0;
+  color: #e0e0e0;
+}
+
 .home-icon {
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 80px;
   font-size: 30px;
   text-decoration: none;
   color: #f1f1f1;
@@ -62,97 +60,66 @@ body {
   color: #fff;
 }
 
+/* eng-button tamamen kaldırıldı */
 
-  
-  
-  .game-board {
-    display: grid;
-    grid-template-columns: repeat(7, 42px);
-    gap: 5px;
-    justify-content: center;
-    margin: 20px auto;
-  }
-  
-  .cell {
-    width: 42px;
-    height: 42px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: bold;
-    color: #fdfdfd;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.7);
-  }
-  
-  .orange { background-color: #d35400; }
-  .pink   { background-color: #c03976; }
-  .red    { background-color: #922b21; }
-  .purple { background-color: #6c3483; }
-  .blue   { background-color: #2980b9; }
-  
-  .mini-board {
-    display: grid;
-    grid-template-columns: repeat(5, 42px);
-    gap: 5px;
-    justify-content: center;
-    margin: 30px auto;
-    max-width: 300px;
-  }
-  
-  .round {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background-color: #3498db;
-    color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.7);
-  }
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(7, 42px);
+  gap: 5px;
+  justify-content: center;
+  margin: 20px auto;
+}
 
-  .eng-button {
-    position: fixed;
-    top: 20px;
-    right: 140px;
-    background-color: rgba(44, 62, 80, 0.85);
-    color: #ecf0f1;
-    padding: 12px 16px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.7);
-    transition: all 0.3s ease;
-    z-index: 100;
-  }
-  
-  .eng-button:hover {
-    background-color: rgba(52, 152, 219, 0.95);
-    transform: scale(1.05);
-  }
-  
-  .home-icon {
-    position: fixed;
-    top: 20px;
-    right: 80px;
-    z-index: 100;
-  }
-  
-  .home-icon svg {
-    transition: transform 0.3s ease;
-  }
-  
-  .home-icon:hover svg {
-    transform: scale(1.1);
-  }
-  
-  
-  /* TRIO harfleri renkli */
-  .cell.t { background-color: #ff4757; }
-  .cell.r { background-color: #ffa502; }
-  .cell.i { background-color: #2ed573; }
-  .cell.o { background-color: #1e90ff; }
-  
+.cell {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fdfdfd;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.7);
+}
+
+.orange { background-color: #d35400; }
+.pink   { background-color: #c03976; }
+.red    { background-color: #922b21; }
+.purple { background-color: #6c3483; }
+.blue   { background-color: #2980b9; }
+
+.cell.t { background-color: #ff4757; }
+.cell.r { background-color: #ffa502; }
+.cell.i { background-color: #2ed573; }
+.cell.o { background-color: #1e90ff; }
+
+.mini-board {
+  display: grid;
+  grid-template-columns: repeat(5, 42px);
+  gap: 5px;
+  justify-content: center;
+  margin: 30px auto;
+  max-width: 300px;
+}
+
+.round {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #3498db;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.7);
+}
+
+.home-icon svg {
+  transition: transform 0.3s ease;
+}
+
+.home-icon:hover svg {
+  transform: scale(1.1);
+}

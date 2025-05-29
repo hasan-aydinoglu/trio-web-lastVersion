@@ -13,6 +13,7 @@ body {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  animation: fadeIn 1.5s ease;
 }
 
 .purchase-navbar {
@@ -119,4 +120,10 @@ body {
 
 .buy-now-btn:hover {
   opacity: 0.9;
+}
+
+/* Fade In Animasyonu */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
