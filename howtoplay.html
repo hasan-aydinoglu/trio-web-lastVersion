@@ -2,41 +2,131 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Trio Design</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <title>How to Play Trio?</title>
+  <link rel="stylesheet" href="howtoplay.css">
+  <style>
+    .lang-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      transition: background-color 0.3s;
+      z-index: 100;
+    }
+    .lang-button:hover {
+      background-color: #2980b9;
+    }
+
+    .tr-button {
+      position: fixed;
+      top: 20px;
+      right: 140px;
+      background-color: rgba(44, 62, 80, 0.85);
+      color: #ecf0f1;
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.7);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+    .tr-button:hover {
+      background-color: rgba(52, 152, 219, 0.95);
+      transform: scale(1.05);
+    }
+
+    .home-icon {
+      position: fixed;
+      top: 20px;
+      right: 80px;
+      z-index: 100;
+    }
+    .home-icon svg {
+      transition: transform 0.3s ease;
+    }
+    .home-icon:hover svg {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
 
-  <div class="hero">
-    <div class="overlay">
-      <nav class="navbar">
-        <h2>Trio</h2>
-        <div class="menu-buttons">
-          <button onclick="window.location.href='howtoplay.html'">How to Play?</button>
-          <button onclick="window.location.href='register.html'">Sign Up</button>
-          <button onclick="window.location.href='aboutus.html'">About Us</button>
-          <button class="buy-btn" onclick="window.location.href='buy.html'">
-            <i class="fas fa-shopping-cart"></i> Buy to Trio
-          </button>
-        </div>
-      </nav>
+    <!-- TR button -->
+    <a href="howtoplay-tr.html" class="tr-button">TR</a>
 
-      <div class="login-container">
-        <h1>Login to Trio</h1>
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button class="login-btn">Login</button>
-        <a href="#" class="forgot">Forgot Password?</a>
-        <p class="signup-text">Don't have an account? <a href="register.html">Sign Up</a></p>
+    <!-- Home icon -->
+    <a href="index.html" class="home-icon" title="Home Page">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#ffffff" viewBox="0 0 24 24">
+        <path d="M12 3l8 8h-3v7h-4v-5h-2v5H7v-7H4z"/>
+      </svg>
+    </a>
 
-        <div class="or-text">Or</div>
-        <button class="social-btn google"><i class="fab fa-google"></i> Sign in with Google</button>
-        <button class="social-btn facebook"><i class="fab fa-facebook-f"></i> Sign in with Facebook</button>
-      </div>
+    <h1>TRIO - How to Play?</h1>
 
+    <div class="instructions">
+      <p>Trio consists of 49 colorful square cards numbered from 1 to 9, and 50 blue round cards numbered from 1 to 50. Colors have no effect on game rules.</p>
     </div>
-  </div>
 
+    <div class="game-board">
+      <!-- 7x7 board -->
+      <div class="cell orange">3</div><div class="cell pink">7</div><div class="cell red">3</div><div class="cell purple">5</div><div class="cell orange">8</div><div class="cell pink">4</div><div class="cell orange">9</div>
+      <div class="cell purple">5</div><div class="cell orange">1</div><div class="cell pink">8</div><div class="cell red">6</div><div class="cell orange">5</div><div class="cell pink">2</div><div class="cell orange">7</div>
+      <div class="cell pink">8</div><div class="cell red">6</div><div class="cell purple">2</div><div class="cell orange">4</div><div class="cell pink">9</div><div class="cell red">1</div><div class="cell orange">9</div>
+      <div class="cell purple">2</div><div class="cell orange">6</div><div class="cell pink">4</div><div class="cell red">7</div><div class="cell orange">5</div><div class="cell purple">5</div><div class="cell pink">3</div>
+      <div class="cell orange">7</div><div class="cell pink">4</div><div class="cell red">3</div><div class="cell purple">2</div><div class="cell orange">1</div><div class="cell pink">6</div><div class="cell orange">3</div>
+      <div class="cell purple">2</div><div class="cell orange">1</div><div class="cell pink">4</div><div class="cell red">8</div><div class="cell orange">3</div><div class="cell pink">9</div><div class="cell purple">5</div>
+      <div class="cell orange">1</div><div class="cell pink">8</div><div class="cell red">6</div><div class="cell purple">7</div><div class="cell orange">2</div><div class="cell pink">4</div><div class="cell orange">6</div>
+    </div>
+
+    <div class="instructions">
+      <h2>Game Setup</h2>
+      <p>Square cards are laid out in a 7x7 grid. Blue round cards stay in the box face down.</p>
+
+      <h2>How to Play?</h2>
+      <p>A player draws one blue card from the box and reveals it to everyone. All players try to find a calculation that reaches this number. The calculation must be made up of 3 adjacent square cards (horizontally, vertically or diagonally). The mathematical operation order is: multiplication/division first, then addition/subtraction.</p>
+
+      <p>The first player to find a correct operation shouts "Trio!" and announces the operation. If it’s correct, they win the blue card. If it’s wrong, the turn passes to the next player or, if there are 2 players, the turn is skipped.</p>
+
+      <p>The player with the most blue cards at the end wins the game.</p>
+    </div>
+
+    <div class="mini-board">
+      <div class="cell pink">7</div>
+      <div class="cell orange">.</div>
+      <div class="cell pink">8</div>
+      <div class="cell orange">-</div>
+      <div class="round">49</div>
+
+      <div class="cell blue">11</div>
+      <div class="cell orange">=</div>
+      <div class="cell pink">5</div>
+      <div class="cell orange">.</div>
+      <div class="cell pink">2</div>
+      <div class="cell orange">+</div>
+      <div class="cell pink">1</div>
+
+      <div class="cell orange">T</div>
+      <div class="cell orange">R</div>
+      <div class="cell orange">I</div>
+      <div class="cell orange">O</div>
+
+      <div class="round">27</div>
+      <div class="cell orange">=</div>
+      <div class="cell red">4</div>
+      <div class="cell orange">.</div>
+      <div class="cell pink">7</div>
+      <div class="cell orange">-</div>
+      <div class="cell pink">1</div>
+    </div>
+
+  </div>
 </body>
 </html>

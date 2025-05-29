@@ -13,34 +13,32 @@
     <h2>Trio</h2>
     <div class="purchase-buttons">
       <button onclick="window.location.href='index.html'">Home</button>
-      <button onclick="window.location.href='cart.html'"><i class="fas fa-shopping-cart"></i> Cart</button>
+      <button onclick="window.location.href='cart.html'">
+        <i class="fas fa-shopping-cart"></i> Cart 
+        <span id="cart-count">0</span>
+      </button>
     </div>
   </nav>
 
   <div class="products-container">
     <div class="product-card">
-      <img src="images/trio.png" alt="Trio Product">
+      
       <h3>Trio Classic</h3>
       <p>Classic edition of Trio board game.</p>
-      <button class="add-cart-btn">Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="images/trio2.png" alt="Trio Product">
-      <h3>Trio Deluxe</h3>
-      <p>Deluxe edition with premium materials.</p>
-      <button class="add-cart-btn">Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="images/trio3.png" alt="Trio Product">
-      <h3>Trio Ultimate</h3>
-      <p>Ultimate edition with accessories.</p>
-      <button class="add-cart-btn">Add to Cart</button>
+      <button class="add-cart-btn" onclick="addToCart()">Add to Cart</button>
+      <button class="buy-now-btn">Buy Now</button>
     </div>
   </div>
 
 </div>
+
+<script>
+  let cartCount = 0;
+  function addToCart() {
+    cartCount++;
+    document.getElementById('cart-count').innerText = cartCount;
+  }
+</script>
 
 </body>
 </html>
