@@ -24,20 +24,14 @@
     <div class="product-card">
       <h3>Trio Classic</h3>
       <p>Classic edition of Trio board game.</p>
-      <button class="add-cart-btn" onclick="addToCart()">Add to Cart</button>
+      <button class="add-cart-btn" onclick="addToCart('Trio Classic', 15)">Add to Cart (£15)</button>
+
       <button class="buy-now-btn">Buy Now</button>
     </div>
   </div>
 
 </div>
 
-<script>
-  let cartCount = 0;
-  function addToCart() {
-    cartCount++;
-    document.getElementById('cart-count').innerText = cartCount;
-  }
-</script>
-
+<script src="purchase.js"></script>
 </body>
 </html>
