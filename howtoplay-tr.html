@@ -1,0 +1,132 @@
+
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Trio Nasıl Oynanır?</title>
+  <link rel="stylesheet" href="howtoplay-tr.css">
+  <style>
+    .lang-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      transition: background-color 0.3s;
+      z-index: 100;
+    }
+    .lang-button:hover {
+      background-color: #2980b9;
+    }
+
+    .eng-button {
+      position: fixed;
+      top: 20px;
+      right: 140px;
+      background-color: rgba(44, 62, 80, 0.85);
+      color: #ecf0f1;
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.7);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+    .eng-button:hover {
+      background-color: rgba(52, 152, 219, 0.95);
+      transform: scale(1.05);
+    }
+
+    .home-icon {
+      position: fixed;
+      top: 20px;
+      right: 80px;
+      z-index: 100;
+    }
+    .home-icon svg {
+      transition: transform 0.3s ease;
+    }
+    .home-icon:hover svg {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ENG butonu -->
+    <a href="howtoplay.html" class="eng-button">ENG</a>
+
+    <!-- Ana sayfa simgesi -->
+    <a href="index.html" class="home-icon" title="Ana Sayfa">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#ffffff" viewBox="0 0 24 24">
+        <path d="M12 3l8 8h-3v7h-4v-5h-2v5H7v-7H4z"/>
+      </svg>
+    </a>
+
+    <h1>TRIO - Nasıl Oynanır?</h1>
+
+    <div class="instructions">
+      <p>Trio; 1’den 9’a kadar numaralandırılmış 49 renkli kare kart ve 1’den 50’ye kadar numaralandırılmış 50 adet mavi yuvarlak karttan oluşur. Renklerin oyun kuralları açısından bir önemi yoktur.</p>
+    </div>
+
+    <div class="game-board">
+      <!-- 7x7 tablo -->
+      <div class="cell orange">3</div><div class="cell pink">7</div><div class="cell red">3</div><div class="cell purple">5</div><div class="cell orange">8</div><div class="cell pink">4</div><div class="cell orange">9</div>
+      <div class="cell purple">5</div><div class="cell orange">1</div><div class="cell pink">8</div><div class="cell red">6</div><div class="cell orange">5</div><div class="cell pink">2</div><div class="cell orange">7</div>
+      <div class="cell pink">8</div><div class="cell red">6</div><div class="cell purple">2</div><div class="cell orange">4</div><div class="cell pink">9</div><div class="cell red">1</div><div class="cell orange">9</div>
+      <div class="cell purple">2</div><div class="cell orange">6</div><div class="cell pink">4</div><div class="cell red">7</div><div class="cell orange">5</div><div class="cell purple">5</div><div class="cell pink">3</div>
+      <div class="cell orange">7</div><div class="cell pink">4</div><div class="cell red">3</div><div class="cell purple">2</div><div class="cell orange">1</div><div class="cell pink">6</div><div class="cell orange">3</div>
+      <div class="cell purple">2</div><div class="cell orange">1</div><div class="cell pink">4</div><div class="cell red">8</div><div class="cell orange">3</div><div class="cell pink">9</div><div class="cell purple">5</div>
+      <div class="cell orange">1</div><div class="cell pink">8</div><div class="cell red">6</div><div class="cell purple">7</div><div class="cell orange">2</div><div class="cell pink">4</div><div class="cell orange">6</div>
+    </div>
+
+    <div class="instructions">
+      <h2>Oyun Hazırlığı</h2>
+      <p>Kare kartlar 7x7 olacak şekilde dizilir. Mavi yuvarlak kartlar yüzü kapalı bir şekilde kutuda bekler.</p>
+
+      <h2>Nasıl Oynanır?</h2>
+      <p>Oyuncu, kutudan bir mavi kart çekip herkesin göreceği şekilde açar. Herkes o anda bu sayıya ulaşacak bir işlem bulmaya çalışır. İşlem; yan yana, üst üste veya çapraz şekilde komşu 3 kare karttan oluşmalıdır. Matematiksel işlem sırası "önce çarpma/bölme, sonra toplama/çıkarma" şeklinde olmalıdır.</p>
+
+      <p>Doğru işlem bulan "Trio!" diye seslenir ve işlemi açıklar. Doğruysa mavi kartı alır. Yanlışsa sıra diğer oyuncuya geçer veya 2 kişi varsa tur geçilir.</p>
+
+      <p>En fazla mavi karta sahip olan oyunu kazanır.</p>
+    </div>
+
+    <div class="mini-board">
+      <div class="cell pink">7</div>
+      <div class="cell orange">.</div>
+      <div class="cell pink">8</div>
+      <div class="cell orange">-</div>
+      <div class="round">49</div>
+
+      <div class="cell blue">11</div>
+      <div class="cell orange">=</div>
+      <div class="cell pink">5</div>
+      <div class="cell orange">.</div>
+      <div class="cell pink">2</div>
+      <div class="cell orange">+</div>
+      <div class="cell pink">1</div>
+
+      <div class="cell orange">T</div>
+      <div class="cell orange">R</div>
+      <div class="cell orange">I</div>
+      <div class="cell orange">O</div>
+
+      <div class="round">27</div>
+      <div class="cell orange">=</div>
+      <div class="cell red">4</div>
+      <div class="cell orange">.</div>
+      <div class="cell pink">7</div>
+      <div class="cell orange">-</div>
+      <div class="cell pink">1</div>
+    </div>
+
+  </div>
+</body>
+</html>

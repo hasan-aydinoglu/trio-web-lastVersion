@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Discover the story behind Trio, an independently developed mathematical strategy game that grew from a physical product into a digital platform."
+  >
+
+  <title>About Us | Trio</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <style>
+    /* =========================
+       ABOUT PAGE
+       ========================= */
+
+    .about-page {
+      min-height: 100vh;
+      color: #111b41;
+      background: #f5f8ff;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       NAVBAR AREA
+       ========================= */
+
+    .about-navbar-area {
+      position: relative;
+      z-index: 20;
+
+      padding: 0 7%;
+
+      color: #ffffff;
+
+      background:
+        linear-gradient(
+          125deg,
+          #03bcb8 0%,
+          #038cca 33%,
+          #0755ff 65%,
+          #1114e9 100%
+        );
+    }
+
+    /* =========================
+       ABOUT HERO
+       ========================= */
+
+    .about-story-hero {
+      position: relative;
+      min-height: calc(100vh - 110px);
+      padding: 75px 7% 115px;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      color: #111b41;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f8fbff 0%,
+          #edf5ff 52%,
+          #e8f8f8 100%
+        );
+    }
+
+    .about-story-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+
+      pointer-events: none;
+
+      background-image:
+        linear-gradient(
+          rgba(7, 85, 255, 0.035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(7, 85, 255, 0.035) 1px,
+          transparent 1px
+        );
+
+      background-size: 70px 70px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.5),
+          transparent
+        );
+    }
+
+    .about-story-background {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .story-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(10px);
+    }
+
+    .story-shape-one {
+      top: -220px;
+      right: -150px;
+
+      width: 560px;
+      height: 560px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(7, 85, 255, 0.2),
+          rgba(7, 85, 255, 0)
+        );
+    }
+
+    .story-shape-two {
+      left: -180px;
+      bottom: -260px;
+
+      width: 600px;
+      height: 600px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(2, 189, 191, 0.22),
+          rgba(2, 189, 191, 0)
+        );
+    }
+
+    .about-story-content {
+      position: relative;
+      z-index: 2;
+
+      width: 100%;
+      max-width: 1350px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      align-items: center;
+      gap: 85px;
+    }
+
+    .about-story-left {
+      max-width: 670px;
+    }
+
+    .about-story-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      margin-bottom: 24px;
+      padding: 9px 15px;
+
+      border: 1px solid rgba(7, 85, 255, 0.18);
+      border-radius: 100px;
+
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+
+      color: #0755ff;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .about-story-left h1 {
+      max-width: 720px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(3.6rem, 5.7vw, 6.5rem);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+
+      color: #0b1741;
+    }
+
+    .about-story-left h1 span {
+      display: block;
+      color: #0755ff;
+    }
+
+    .about-story-intro {
+      max-width: 620px;
+      margin-top: 30px;
+
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: #65708e;
+    }
+
+    .founder-quote {
+      position: relative;
+
+      margin-top: 35px;
+      padding: 28px 30px 28px 75px;
+
+      border: 1px solid #dce6f8;
+      border-radius: 24px;
+
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(14px);
+
+      box-shadow:
+        0 18px 55px rgba(43, 72, 130, 0.08);
+    }
+
+    .quote-icon {
+      position: absolute;
+      top: 28px;
+      left: 27px;
+
+      width: 35px;
+      height: 35px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+
+      color: #ffffff;
+      background: #0755ff;
+    }
+
+    .founder-quote blockquote {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.65;
+
+      color: #253154;
+    }
+
+    .quote-author {
+      margin-top: 18px;
+    }
+
+    .quote-author strong,
+    .quote-author span {
+      display: block;
+    }
+
+    .quote-author strong {
+      margin-bottom: 3px;
+
+      font-size: 0.88rem;
+      color: #0755ff;
+    }
+
+    .quote-author span {
+      font-size: 0.76rem;
+      color: #7b849e;
+    }
+
+    .about-story-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 25px;
+
+      margin-top: 34px;
+    }
+
+    .story-primary-button {
+      min-height: 56px;
+      padding: 0 26px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+
+      border-radius: 100px;
+
+      font-weight: 700;
+      color: #ffffff;
+      background: #0755ff;
+
+      box-shadow:
+        0 15px 35px rgba(7, 85, 255, 0.25);
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .story-primary-button:hover {
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 20px 45px rgba(7, 85, 255, 0.34);
+    }
+
+    .story-text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      font-size: 0.92rem;
+      font-weight: 700;
+
+      color: #263250;
+    }
+
+    .story-text-link i {
+      color: #0755ff;
+      transition: transform 0.25s ease;
+    }
+
+    .story-text-link:hover i {
+      transform: translateX(5px);
+    }
+
+    /* =========================
+       JOURNEY PANEL
+       ========================= */
+
+    .about-story-right {
+      width: 100%;
+    }
+
+    .journey-panel {
+      position: relative;
+
+      padding: 38px;
+
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 34px;
+
+      color: #ffffff;
+
+      background:
+        radial-gradient(
+          circle at 90% 5%,
+          rgba(0, 255, 231, 0.42),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          #051b58 0%,
+          #0755ff 58%,
+          #02aeb2 100%
+        );
+
+      box-shadow:
+        0 35px 90px rgba(27, 66, 137, 0.23);
+    }
+
+    .journey-product {
+      position: relative;
+      margin-bottom: 34px;
+      padding: 12px;
+
+      overflow: hidden;
+
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 27px;
+
+      background:
+        rgba(255, 255, 255, 0.1);
+
+      box-shadow:
+        0 24px 60px rgba(0, 17, 91, 0.28);
+    }
+
+    .journey-product::before {
+      content: '';
+      position: absolute;
+      inset: -25%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(142, 255, 245, 0.35),
+          transparent 58%
+        );
+
+      filter: blur(28px);
+      pointer-events: none;
+    }
+
+    .journey-product img {
+      position: relative;
+      z-index: 2;
+
+      width: 100%;
+      max-height: 330px;
+
+      display: block;
+      object-fit: cover;
+      object-position: center;
+
+      border-radius: 19px;
+
+      box-shadow:
+        0 18px 45px rgba(0, 10, 70, 0.28);
+
+      transition:
+        transform 0.35s ease;
+    }
+
+    .journey-product:hover img {
+      transform: scale(1.025);
+    }
+
+    .journey-product-badge {
+      position: absolute;
+      right: 25px;
+      bottom: 25px;
+      z-index: 3;
+
+      padding: 10px 15px;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 100px;
+
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+
+      color: #ffffff;
+      background: rgba(4, 24, 91, 0.72);
+      backdrop-filter: blur(14px);
+
+      box-shadow:
+        0 12px 30px rgba(0, 12, 80, 0.25);
+    }
+
+    .journey-panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 25px;
+
+      margin-bottom: 38px;
+      padding-bottom: 28px;
+
+      border-bottom:
+        1px solid rgba(255, 255, 255, 0.17);
+    }
+
+    .journey-panel-header span {
+      display: block;
+      margin-bottom: 9px;
+
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+
+      color: #89fff4;
+    }
+
+    .journey-panel-header h2 {
+      max-width: 420px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      line-height: 1.12;
+    }
+
+    .journey-panel-logo {
+      width: 66px;
+      height: 66px;
+
+      flex-shrink: 0;
+
+      object-fit: cover;
+      border-radius: 18px;
+
+      box-shadow:
+        0 15px 35px rgba(0, 12, 80, 0.3);
+    }
+
+    .journey-timeline {
+      position: relative;
+    }
+
+    .timeline-item {
+      position: relative;
+
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 19px;
+
+      padding-bottom: 30px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-marker {
+      position: relative;
+
+      display: flex;
+      justify-content: center;
+    }
+
+    .timeline-marker::after {
+      content: '';
+      position: absolute;
+      top: 17px;
+      bottom: -32px;
+
+      width: 1px;
+
+      background:
+        rgba(255, 255, 255, 0.24);
+    }
+
+    .timeline-item:last-child
+    .timeline-marker::after {
+      display: none;
+    }
+
+    .timeline-marker span {
+      position: relative;
+      z-index: 2;
+
+      width: 14px;
+      height: 14px;
+
+      margin-top: 3px;
+
+      border:
+        4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+
+      background: #8efff5;
+
+      box-shadow:
+        0 0 0 5px rgba(142, 255, 245, 0.12);
+    }
+
+    .timeline-content small {
+      display: block;
+      margin-bottom: 6px;
+
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+
+      color: #8efff5;
+    }
+
+    .timeline-content h3 {
+      margin-bottom: 7px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.18rem;
+    }
+
+    .timeline-content p {
+      max-width: 500px;
+
+      font-size: 0.85rem;
+      line-height: 1.65;
+
+      color: rgba(255, 255, 255, 0.66);
+    }
+
+    /* =========================
+       COMMON SECTION STYLES
+       ========================= */
+
+    .about-section {
+      padding: 110px 7%;
+    }
+
+    .about-section-heading {
+      max-width: 830px;
+      margin: 0 auto 65px;
+
+      text-align: center;
+    }
+
+    .about-section-label {
+      display: inline-block;
+      margin-bottom: 17px;
+
+      font-size: 0.77rem;
+      font-weight: 800;
+      letter-spacing: 0.17em;
+
+      color: #0755ff;
+    }
+
+    .about-section-heading h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.5rem, 4.5vw, 4.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+
+      color: #111b41;
+    }
+
+    .about-section-heading h2 span {
+      color: #0755ff;
+    }
+
+    .about-section-heading p {
+      max-width: 700px;
+      margin: 21px auto 0;
+
+      font-size: 1.03rem;
+      line-height: 1.8;
+
+      color: #69728f;
+    }
+
+    /* =========================
+       OUR STORY
+       ========================= */
+
+    .story-section {
+      color: #111b41;
+      background: #ffffff;
+    }
+
+    .story-layout {
+      max-width: 1250px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: stretch;
+      gap: 35px;
+    }
+
+    .story-highlight {
+      position: relative;
+
+      min-height: 570px;
+      padding: 48px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      overflow: hidden;
+
+      border-radius: 34px;
+
+      color: #ffffff;
+
+      background:
+        radial-gradient(
+          circle at 80% 15%,
+          rgba(0, 255, 231, 0.5),
+          transparent 35%
+        ),
+        linear-gradient(
+          145deg,
+          #02b8bd,
+          #056bf0 58%,
+          #1732ec
+        );
+
+      box-shadow:
+        0 28px 80px rgba(29, 67, 132, 0.2);
+    }
+
+    .story-highlight::before {
+      content: 'TRIO';
+      position: absolute;
+      top: 25px;
+      right: 30px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(4rem, 9vw, 8rem);
+      font-weight: 800;
+
+      color: rgba(255, 255, 255, 0.08);
+    }
+
+    .story-highlight-icon {
+      position: relative;
+      z-index: 2;
+
+      width: 72px;
+      height: 72px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 30px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 22px;
+
+      font-size: 1.8rem;
+
+      background:
+        rgba(255, 255, 255, 0.14);
+
+      backdrop-filter: blur(12px);
+    }
+
+    .story-highlight h3 {
+      position: relative;
+      z-index: 2;
+
+      margin-bottom: 20px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.08;
+    }
+
+    .story-highlight p {
+      position: relative;
+      z-index: 2;
+
+      max-width: 570px;
+
+      font-size: 1rem;
+      line-height: 1.8;
+
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .story-content {
+      padding: 48px;
+
+      border: 1px solid #e2e9f8;
+      border-radius: 34px;
+
+      background: #f8faff;
+
+      box-shadow:
+        0 20px 65px rgba(29, 67, 132, 0.08);
+    }
+
+    .story-content h3 {
+      margin-bottom: 23px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      line-height: 1.15;
+    }
+
+    .story-content p {
+      margin-bottom: 21px;
+
+      font-size: 1rem;
+      line-height: 1.85;
+
+      color: #69728f;
+    }
+
+    .story-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-content strong {
+      color: #0755ff;
+    }
+
+    /* =========================
+       DEVELOPMENT SECTION
+       ========================= */
+
+    .development-section {
+      color: #ffffff;
+
+      background:
+        radial-gradient(
+          circle at 15% 15%,
+          rgba(0, 217, 211, 0.35),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 75%,
+          rgba(71, 61, 255, 0.4),
+          transparent 32%
+        ),
+        #020b38;
+    }
+
+    .development-section
+    .about-section-label {
+      color: #7dfff4;
+    }
+
+    .development-section
+    .about-section-heading h2 {
+      color: #ffffff;
+    }
+
+    .development-section
+    .about-section-heading h2 span {
+      color: #7dfff4;
+    }
+
+    .development-section
+    .about-section-heading p {
+      color: rgba(255, 255, 255, 0.66);
+    }
+
+    .development-grid {
+      max-width: 1250px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .development-card {
+      min-height: 340px;
+      padding: 32px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 28px;
+
+      background:
+        rgba(255, 255, 255, 0.07);
+
+      backdrop-filter: blur(16px);
+
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .development-card:hover {
+      transform: translateY(-9px);
+
+      background:
+        rgba(255, 255, 255, 0.11);
+    }
+
+    .development-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-width: 70px;
+      height: 34px;
+      padding: 0 14px;
+
+      margin-bottom: 28px;
+
+      border-radius: 100px;
+
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+
+      color: #06145b;
+      background: #8efff5;
+    }
+
+    .development-icon {
+      width: 58px;
+      height: 58px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 25px;
+
+      border-radius: 18px;
+
+      font-size: 1.4rem;
+
+      background:
+        rgba(255, 255, 255, 0.12);
+    }
+
+    .development-card h3 {
+      margin-bottom: 15px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+    }
+
+    .development-card p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+
+      color: rgba(255, 255, 255, 0.66);
+    }
+
+    /* =========================
+       PRODUCT SECTION
+       ========================= */
+
+    .product-section {
+      color: #111b41;
+      background: #f5f8ff;
+    }
+
+    .product-grid {
+      max-width: 1250px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .product-card {
+      min-height: 350px;
+      padding: 38px;
+
+      border: 1px solid #e2e9f8;
+      border-radius: 30px;
+
+      background: #ffffff;
+
+      box-shadow:
+        0 20px 65px rgba(29, 67, 132, 0.08);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-9px);
+
+      box-shadow:
+        0 30px 75px rgba(29, 67, 132, 0.14);
+    }
+
+    .product-icon {
+      width: 66px;
+      height: 66px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 28px;
+
+      border-radius: 21px;
+
+      font-size: 1.5rem;
+
+      color: #0755ff;
+      background: #ecf3ff;
+    }
+
+    .product-card h3 {
+      margin-bottom: 15px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.55rem;
+    }
+
+    .product-card p {
+      line-height: 1.78;
+      color: #727a96;
+    }
+
+    /* =========================
+       FOUNDER SECTION
+       ========================= */
+
+    .founder-section {
+      color: #111b41;
+      background: #ffffff;
+    }
+
+    .founder-container {
+      max-width: 1200px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .founder-visual {
+      min-height: 480px;
+      padding: 40px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      border-radius: 34px;
+
+      color: #ffffff;
+
+      background:
+        radial-gradient(
+          circle at 80% 15%,
+          rgba(0, 255, 231, 0.45),
+          transparent 35%
+        ),
+        linear-gradient(
+          145deg,
+          #02b8bd,
+          #056bf0 60%,
+          #1732ec
+        );
+
+      box-shadow:
+        0 28px 80px rgba(29, 67, 132, 0.2);
+    }
+
+    .founder-avatar {
+      width: 115px;
+      height: 115px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: auto;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 32px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+
+      background:
+        rgba(255, 255, 255, 0.14);
+
+      backdrop-filter: blur(15px);
+    }
+
+    .founder-visual h3 {
+      margin-top: 50px;
+      margin-bottom: 8px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+    }
+
+    .founder-role {
+      font-size: 0.92rem;
+
+      color:
+        rgba(255, 255, 255, 0.72);
+    }
+
+    .founder-content h2 {
+      margin-bottom: 27px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    .founder-content h2 span {
+      color: #0755ff;
+    }
+
+    .founder-content p {
+      margin-bottom: 20px;
+
+      font-size: 1rem;
+      line-height: 1.85;
+
+      color: #69728f;
+    }
+
+    .founder-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      margin-top: 30px;
+    }
+
+    .founder-skill {
+      padding: 10px 15px;
+
+      border: 1px solid #dbe5fa;
+      border-radius: 100px;
+
+      font-size: 0.78rem;
+      font-weight: 700;
+
+      color: #0755ff;
+      background: #f8faff;
+    }
+
+    /* =========================
+       VISION SECTION
+       ========================= */
+
+    .vision-section {
+      text-align: center;
+      color: #ffffff;
+
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(0, 255, 221, 0.35),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 80% 80%,
+          rgba(93, 76, 255, 0.45),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #02aeb5,
+          #0755ff 55%,
+          #1b22d9
+        );
+    }
+
+    .vision-container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .vision-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      margin-bottom: 22px;
+      padding: 10px 17px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 100px;
+
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+
+      background:
+        rgba(255, 255, 255, 0.1);
+    }
+
+    .vision-section h2 {
+      margin-bottom: 25px;
+
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.6rem, 5vw, 4.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .vision-section p {
+      max-width: 760px;
+      margin: 0 auto;
+
+      font-size: 1.05rem;
+      line-height: 1.8;
+
+      color:
+        rgba(255, 255, 255, 0.78);
+    }
+
+    .vision-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+
+      margin-top: 38px;
+    }
+
+    .vision-primary,
+    .vision-secondary {
+      min-height: 56px;
+      padding: 0 27px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+
+      border-radius: 100px;
+
+      font-weight: 700;
+
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .vision-primary {
+      color: #0755ff;
+      background: #ffffff;
+    }
+
+    .vision-secondary {
+      border:
+        1px solid rgba(255, 255, 255, 0.32);
+
+      color: #ffffff;
+      background:
+        rgba(255, 255, 255, 0.1);
+    }
+
+    .vision-primary:hover,
+    .vision-secondary:hover {
+      transform: translateY(-4px);
+    }
+
+    /* =========================
+       TABLET
+       ========================= */
+
+    @media (max-width: 1050px) {
+      .about-story-content {
+        gap: 45px;
+      }
+
+      .journey-panel {
+        padding: 30px;
+      }
+
+      .development-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .product-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .founder-container {
+        grid-template-columns:
+          0.9fr 1.1fr;
+
+        gap: 35px;
+      }
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 800px) {
+      .about-navbar-area {
+        padding: 0 22px;
+      }
+
+      .about-story-hero {
+        min-height: auto;
+        padding: 55px 22px 85px;
+      }
+
+      .about-story-content {
+        grid-template-columns: 1fr;
+        gap: 55px;
+      }
+
+      .about-story-left {
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .about-story-left h1 {
+        margin: auto;
+
+        font-size:
+          clamp(3rem, 13vw, 4.8rem);
+      }
+
+      .about-story-intro {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .founder-quote {
+        text-align: left;
+      }
+
+      .about-story-actions {
+        justify-content: center;
+      }
+
+      .journey-panel {
+        max-width: 650px;
+        margin: auto;
+      }
+
+      .journey-product img {
+        max-height: none;
+      }
+
+      .about-section {
+        padding: 80px 22px;
+      }
+
+      .story-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .story-highlight {
+        min-height: 440px;
+      }
+
+      .development-grid,
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .development-card,
+      .product-card {
+        min-height: auto;
+      }
+
+      .founder-container {
+        grid-template-columns: 1fr;
+      }
+
+      .founder-visual {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .about-navbar-area {
+        padding: 0 17px;
+      }
+
+      .about-story-hero {
+        padding: 40px 17px 70px;
+      }
+
+      .about-story-left h1 {
+        font-size:
+          clamp(2.7rem, 13vw, 3.9rem);
+      }
+
+      .about-story-intro {
+        font-size: 0.96rem;
+      }
+
+      .founder-quote {
+        padding: 70px 23px 24px;
+      }
+
+      .quote-icon {
+        top: 23px;
+        left: 23px;
+      }
+
+      .about-story-actions {
+        flex-direction: column;
+      }
+
+      .story-primary-button {
+        width: 100%;
+      }
+
+      .journey-panel {
+        padding: 25px 21px;
+        border-radius: 25px;
+      }
+
+      .journey-product {
+        margin-bottom: 28px;
+        padding: 8px;
+        border-radius: 21px;
+      }
+
+      .journey-product img {
+        border-radius: 15px;
+      }
+
+      .journey-product-badge {
+        right: 16px;
+        bottom: 16px;
+        padding: 8px 11px;
+        font-size: 0.62rem;
+      }
+
+      .journey-panel-header {
+        align-items: center;
+      }
+
+      .journey-panel-logo {
+        width: 52px;
+        height: 52px;
+
+        border-radius: 14px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 24px 1fr;
+        gap: 14px;
+      }
+
+      .about-section {
+        padding: 70px 17px;
+      }
+
+      .story-highlight,
+      .story-content {
+        padding: 29px 25px;
+        border-radius: 25px;
+      }
+
+      .story-highlight {
+        min-height: 400px;
+      }
+
+      .development-card,
+      .product-card {
+        padding: 28px 24px;
+        border-radius: 24px;
+      }
+
+      .founder-visual {
+        min-height: 380px;
+        padding: 30px 25px;
+
+        border-radius: 25px;
+      }
+
+      .founder-avatar {
+        width: 95px;
+        height: 95px;
+
+        border-radius: 27px;
+        font-size: 2rem;
+      }
+
+      .vision-actions {
+        flex-direction: column;
+      }
+
+      .vision-primary,
+      .vision-secondary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="about-page">
+
+    <header class="about-navbar-area">
+
+      <nav class="navbar">
+
+        <a
+          href="index.html"
+          class="navbar-brand"
+        >
+          <img
+            src="trio-logo.png"
+            alt="Trio Logo"
+            class="navbar-logo"
+          >
+        </a>
+
+        <button
+          type="button"
+          class="mobile-menu-button"
+          id="mobileMenuButton"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="navigationLinks"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div
+          class="navigation-links"
+          id="navigationLinks"
+        >
+
+          <a href="index.html">
+            Home
+          </a>
+
+          <a href="howtoplay.html">
+            How to Play
+          </a>
+
+          <a href="register.html">
+            Sign Up
+          </a>
+
+          <a
+            href="purchase.html"
+            class="buy-button"
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+            Buy Trio
+          </a>
+
+        </div>
+
+      </nav>
+
+    </header>
+
+    <main>
+
+      <section class="about-story-hero">
+
+        <div class="about-story-background">
+          <span
+            class="story-shape story-shape-one"
+          ></span>
+
+          <span
+            class="story-shape story-shape-two"
+          ></span>
+        </div>
+
+        <div class="about-story-content">
+
+          <div class="about-story-left">
+
+            <span class="about-story-label">
+              <i class="fa-solid fa-shapes"></i>
+              ABOUT TRIO
+            </span>
+
+            <h1>
+              Created from an idea.
+              <span>
+                Built into a real product.
+              </span>
+            </h1>
+
+            <p class="about-story-intro">
+              Trio is an independently created
+              mathematical strategy game that began
+              as a physical product and continues to
+              grow through software, digital gameplay
+              and international ambition.
+            </p>
+
+            <div class="founder-quote">
+
+              <div class="quote-icon">
+                <i
+                  class="fa-solid fa-quote-left"
+                ></i>
+              </div>
+
+              <blockquote>
+                I created Trio to show that
+                mathematical thinking could become
+                part of an engaging, competitive
+                and social game experience.
+              </blockquote>
+
+              <div class="quote-author">
+                <strong>
+                  Hasan Aydinoglu
+                </strong>
+
+                <span>
+                  Founder and Developer of Trio
+                </span>
+              </div>
+
+            </div>
+
+            <div class="about-story-actions">
+
+              <a
+                href="#our-story"
+                class="story-primary-button"
+              >
+                Read Our Story
+
+                <i
+                  class="fa-solid fa-arrow-down"
+                ></i>
+              </a>
+
+              <a
+                href="howtoplay.html"
+                class="story-text-link"
+              >
+                See how Trio works
+
+                <i
+                  class="fa-solid fa-arrow-right"
+                ></i>
+              </a>
+
+            </div>
+
+          </div>
+
+          <div class="about-story-right">
+
+            <div class="journey-panel">
+
+              <div class="journey-panel-header">
+
+                <div>
+                  <span>
+                    TRIO JOURNEY
+                  </span>
+
+                  <h2>
+                    From concept to digital
+                    development
+                  </h2>
+                </div>
+
+                <img
+                  src="trio-logo.png"
+                  alt="Trio Logo"
+                  class="journey-panel-logo"
+                >
+
+              </div>
+
+              <div class="journey-product">
+                <img
+                  src="trio-face.png"
+                  alt="Trio Mathematical Strategy Game"
+                >
+
+                <span class="journey-product-badge">
+                  <i class="fa-solid fa-box-open"></i>
+                  THE PHYSICAL PRODUCT
+                </span>
+              </div>
+
+              <div class="journey-timeline">
+
+                <div class="timeline-item">
+
+                  <div class="timeline-marker">
+                    <span></span>
+                  </div>
+
+                  <div class="timeline-content">
+
+                    <small>
+                      2022
+                    </small>
+
+                    <h3>
+                      Original Game Created
+                    </h3>
+
+                    <p>
+                      The physical Trio board game
+                      was developed around
+                      mathematical reasoning,
+                      observation and strategic
+                      competition.
+                    </p>
+
+                  </div>
+
+                </div>
+
+                <div class="timeline-item">
+
+                  <div class="timeline-marker">
+                    <span></span>
+                  </div>
+
+                  <div class="timeline-content">
+
+                    <small>
+                      COMMERCIAL DEVELOPMENT
+                    </small>
+
+                    <h3>
+                      Introduced to Customers
+                    </h3>
+
+                    <p>
+                      Trio entered online commerce,
+                      creating practical experience
+                      in sales, customer service,
+                      product fulfilment and brand
+                      development.
+                    </p>
+
+                  </div>
+
+                </div>
+
+                <div class="timeline-item">
+
+                  <div class="timeline-marker">
+                    <span></span>
+                  </div>
+
+                  <div class="timeline-content">
+
+                    <small>
+                      DIGITAL EXPANSION
+                    </small>
+
+                    <h3>
+                      Mobile Application Built
+                    </h3>
+
+                    <p>
+                      The physical concept evolved
+                      into a connected mobile product
+                      with profiles, game modes,
+                      friends, messaging and
+                      multiplayer-oriented features.
+                    </p>
+
+                  </div>
+
+                </div>
+
+                <div class="timeline-item">
+
+                  <div class="timeline-marker">
+                    <span></span>
+                  </div>
+
+                  <div class="timeline-content">
+
+                    <small>
+                      NEXT STAGE
+                    </small>
+
+                    <h3>
+                      International Growth
+                    </h3>
+
+                    <p>
+                      Trio is being developed toward
+                      wider digital distribution,
+                      international players and
+                      long-term educational and
+                      commercial partnerships.
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section
+        class="about-section story-section"
+        id="our-story"
+      >
+
+        <div class="about-section-heading">
+
+          <span class="about-section-label">
+            OUR STORY
+          </span>
+
+          <h2>
+            From a physical game to a
+            <span>digital product</span>
+          </h2>
+
+          <p>
+            Trio was created with the belief that
+            mathematical thinking can be competitive,
+            social and genuinely enjoyable.
+          </p>
+
+        </div>
+
+        <div class="story-layout">
+
+          <article class="story-highlight">
+
+            <div class="story-highlight-icon">
+              <i
+                class="fa-solid fa-lightbulb"
+              ></i>
+            </div>
+
+            <h3>
+              Making mathematics part of the game
+            </h3>
+
+            <p>
+              Instead of treating maths as a separate
+              learning activity, Trio places
+              calculation, observation and
+              decision-making at the centre of the
+              gameplay.
+            </p>
+
+          </article>
+
+          <article class="story-content">
+
+            <h3>
+              The beginning of Trio
+            </h3>
+
+            <p>
+              Trio started in 2022 as an independently
+              developed physical board game based on
+              mathematical reasoning, logical
+              decision-making and competitive play.
+            </p>
+
+            <p>
+              The aim was to create a game that could
+              be understood quickly while continuing
+              to challenge players through different
+              number combinations and strategic
+              choices.
+            </p>
+
+            <p>
+              After developing the physical product,
+              Trio was introduced to customers through
+              online commerce channels. This created
+              direct experience in product
+              development, customer communication,
+              sales, fulfilment and the operation of
+              an independent games business.
+            </p>
+
+            <p>
+              The project later expanded beyond the
+              physical game. Founder
+              <strong>Hasan Aydinoglu</strong>
+              began developing Trio as a mobile
+              application, transforming the original
+              concept into an interactive digital
+              experience.
+            </p>
+
+            <p>
+              Today, Trio represents the connection
+              between a commercially tested physical
+              product and an evolving digital
+              platform designed for wider
+              accessibility and international growth.
+            </p>
+
+          </article>
+
+        </div>
+
+      </section>
+
+      <section
+        class="about-section development-section"
+      >
+
+        <div class="about-section-heading">
+
+          <span class="about-section-label">
+            PRODUCT DEVELOPMENT
+          </span>
+
+          <h2>
+            Building Trio
+            <span>step by step</span>
+          </h2>
+
+          <p>
+            Every stage of Trio has added a new layer
+            to the product, from the original physical
+            game to its developing digital ecosystem.
+          </p>
+
+        </div>
+
+        <div class="development-grid">
+
+          <article class="development-card">
+
+            <span class="development-number">
+              01
+            </span>
+
+            <div class="development-icon">
+              <i
+                class="fa-solid fa-chess-board"
+              ></i>
+            </div>
+
+            <h3>
+              Physical Product
+            </h3>
+
+            <p>
+              Trio began as a physical mathematical
+              strategy game designed around numbers,
+              calculations, observation and
+              competitive decision-making.
+            </p>
+
+          </article>
+
+          <article class="development-card">
+
+            <span class="development-number">
+              02
+            </span>
+
+            <div class="development-icon">
+              <i
+                class="fa-solid fa-store"
+              ></i>
+            </div>
+
+            <h3>
+              Commercial Experience
+            </h3>
+
+            <p>
+              The game reached customers through
+              online commerce, generating practical
+              experience in sales, fulfilment,
+              customer relationships and product
+              operations.
+            </p>
+
+          </article>
+
+          <article class="development-card">
+
+            <span class="development-number">
+              03
+            </span>
+
+            <div class="development-icon">
+              <i
+                class="fa-solid fa-mobile-screen-button"
+              ></i>
+            </div>
+
+            <h3>
+              Digital Development
+            </h3>
+
+            <p>
+              The physical gameplay was expanded into
+              a mobile application with user accounts,
+              profiles, game modes and connected
+              social features.
+            </p>
+
+          </article>
+
+          <article class="development-card">
+
+            <span class="development-number">
+              04
+            </span>
+
+            <div class="development-icon">
+              <i
+                class="fa-solid fa-globe"
+              ></i>
+            </div>
+
+            <h3>
+              International Vision
+            </h3>
+
+            <p>
+              Trio is being developed toward broader
+              international distribution across
+              physical and digital platforms.
+            </p>
+
+          </article>
+
+        </div>
+
+      </section>
+
+      <section
+        class="about-section product-section"
+      >
+
+        <div class="about-section-heading">
+
+          <span class="about-section-label">
+            THE DIGITAL PRODUCT
+          </span>
+
+          <h2>
+            More than a
+            <span>digital board game</span>
+          </h2>
+
+          <p>
+            Trio’s mobile development expands the
+            original game into a connected platform
+            where players can compete, communicate
+            and build their profiles.
+          </p>
+
+        </div>
+
+        <div class="product-grid">
+
+          <article class="product-card">
+
+            <div class="product-icon">
+              <i
+                class="fa-solid fa-gamepad"
+              ></i>
+            </div>
+
+            <h3>
+              Multiple Game Modes
+            </h3>
+
+            <p>
+              The application is designed with
+              multiple gameplay formats, allowing
+              Trio’s core mathematical concept to be
+              experienced in different ways.
+            </p>
+
+          </article>
+
+          <article class="product-card">
+
+            <div class="product-icon">
+              <i
+                class="fa-solid fa-user-group"
+              ></i>
+            </div>
+
+            <h3>
+              Connected Players
+            </h3>
+
+            <p>
+              Profiles, friends, messaging and online
+              interaction help transform Trio into a
+              social and connected game experience.
+            </p>
+
+          </article>
+
+          <article class="product-card">
+
+            <div class="product-icon">
+              <i
+                class="fa-solid fa-code"
+              ></i>
+            </div>
+
+            <h3>
+              Continuous Development
+            </h3>
+
+            <p>
+              Trio continues to evolve through mobile
+              development, interface improvements,
+              new features and ongoing technical
+              iteration.
+            </p>
+
+          </article>
+
+        </div>
+
+      </section>
+
+      <section
+        class="about-section founder-section"
+      >
+
+        <div class="founder-container">
+
+          <div class="founder-visual">
+
+            <div class="founder-avatar">
+              HA
+            </div>
+
+            <h3>
+              Hasan Aydinoglu
+            </h3>
+
+            <span class="founder-role">
+              Founder and Developer of Trio
+            </span>
+
+          </div>
+
+          <div class="founder-content">
+
+            <span class="about-section-label">
+              THE FOUNDER
+            </span>
+
+            <h2>
+              Building across
+              <span>
+                product and technology
+              </span>
+            </h2>
+
+            <p>
+              Trio was founded and independently
+              developed by Hasan Aydinoglu. His work
+              on the project spans product
+              development, game design, commercial
+              operations, branding and software
+              development.
+            </p>
+
+            <p>
+              After establishing the physical product
+              and gaining practical market
+              experience, Hasan began developing
+              Trio’s mobile application using modern
+              digital technologies.
+            </p>
+
+            <p>
+              The mobile product has been developed
+              to support multiple game modes, user
+              registration, profiles, friends,
+              messaging and multiplayer-oriented
+              gameplay.
+            </p>
+
+            <p>
+              This work reflects the continuous
+              development of Trio from a standalone
+              physical game into a connected digital
+              product.
+            </p>
+
+            <p>
+              Hasan is also a co-founder of the
+              UK-based company Narrative Circle
+              Limited, supporting the longer-term
+              objective of developing original
+              products and building an international
+              presence in the digital games sector.
+            </p>
+
+            <div class="founder-skills">
+
+              <span class="founder-skill">
+                Product Development
+              </span>
+
+              <span class="founder-skill">
+                Mobile Development
+              </span>
+
+              <span class="founder-skill">
+                Game Design
+              </span>
+
+              <span class="founder-skill">
+                React Native
+              </span>
+
+              <span class="founder-skill">
+                Firebase
+              </span>
+
+              <span class="founder-skill">
+                E-commerce
+              </span>
+
+              <span class="founder-skill">
+                Business Operations
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section
+        class="about-section vision-section"
+      >
+
+        <div class="vision-container">
+
+          <span class="vision-label">
+            <i class="fa-solid fa-rocket"></i>
+            THE NEXT CHAPTER
+          </span>
+
+          <h2>
+            The Trio journey is only beginning.
+          </h2>
+
+          <p>
+            The long-term vision is to grow Trio
+            across physical and digital platforms,
+            reach players internationally and
+            continue developing technology that makes
+            strategic mathematical gameplay more
+            accessible.
+          </p>
+
+          <div class="vision-actions">
+
+            <a
+              href="purchase.html"
+              class="vision-primary"
+            >
+              Buy Trio
+
+              <i
+                class="fa-solid fa-arrow-right"
+              ></i>
+            </a>
+
+            <a
+              href="howtoplay.html"
+              class="vision-secondary"
+            >
+              Learn How to Play
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer class="footer">
+
+      <div class="footer-brand">
+
+        <img
+          src="trio-logo.png"
+          alt="Trio Logo"
+        >
+
+        <span>TRIO</span>
+
+      </div>
+
+      <p>
+        © 2026 Trio. All rights reserved.
+      </p>
+
+      <div class="social-links">
+
+        <a
+          href="#"
+          aria-label="Instagram"
+        >
+          <i
+            class="fa-brands fa-instagram"
+          ></i>
+        </a>
+
+        <a
+          href="#"
+          aria-label="TikTok"
+        >
+          <i
+            class="fa-brands fa-tiktok"
+          ></i>
+        </a>
+
+        <a
+          href="#"
+          aria-label="Facebook"
+        >
+          <i
+            class="fa-brands fa-facebook-f"
+          ></i>
+        </a>
+
+      </div>
+
+    </footer>
+
+  </div>
+
+  <script>
+    document.addEventListener(
+      'DOMContentLoaded',
+      () => {
+        const mobileMenuButton =
+          document.getElementById(
+            'mobileMenuButton'
+          );
+
+        const navigationLinks =
+          document.getElementById(
+            'navigationLinks'
+          );
+
+        if (
+          !mobileMenuButton ||
+          !navigationLinks
+        ) {
+          return;
+        }
+
+        const menuIcon =
+          mobileMenuButton.querySelector('i');
+
+        mobileMenuButton.addEventListener(
+          'click',
+          () => {
+            const isActive =
+              navigationLinks.classList.toggle(
+                'active'
+              );
+
+            mobileMenuButton.setAttribute(
+              'aria-expanded',
+              String(isActive)
+            );
+
+            if (menuIcon) {
+              menuIcon.classList.toggle(
+                'fa-bars',
+                !isActive
+              );
+
+              menuIcon.classList.toggle(
+                'fa-xmark',
+                isActive
+              );
+            }
+          }
+        );
+
+        navigationLinks
+          .querySelectorAll('a')
+          .forEach((link) => {
+            link.addEventListener(
+              'click',
+              () => {
+                navigationLinks.classList.remove(
+                  'active'
+                );
+
+                mobileMenuButton.setAttribute(
+                  'aria-expanded',
+                  'false'
+                );
+
+                if (menuIcon) {
+                  menuIcon.classList.add(
+                    'fa-bars'
+                  );
+
+                  menuIcon.classList.remove(
+                    'fa-xmark'
+                  );
+                }
+              }
+            );
+          });
+
+        window.addEventListener(
+          'resize',
+          () => {
+            if (window.innerWidth > 800) {
+              navigationLinks.classList.remove(
+                'active'
+              );
+
+              mobileMenuButton.setAttribute(
+                'aria-expanded',
+                'false'
+              );
+
+              if (menuIcon) {
+                menuIcon.classList.add(
+                  'fa-bars'
+                );
+
+                menuIcon.classList.remove(
+                  'fa-xmark'
+                );
+              }
+            }
+          }
+        );
+      }
+    );
+  </script>
+
+</body>
+</html>

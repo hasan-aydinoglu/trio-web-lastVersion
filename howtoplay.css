@@ -1,0 +1,137 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #f1f1f1;
+  text-align: center;
+  background: url('images/trioabout.png') no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(4px);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.6);
+}
+
+.top-buttons {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+}
+
+.lang-button, .tr-button {
+  background-color: rgba(44, 62, 80, 0.85);
+  color: #ecf0f1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.7);
+  transition: all 0.3s ease;
+}
+
+.lang-button:hover, .tr-button:hover {
+  background-color: rgba(52, 152, 219, 0.95);
+  transform: scale(1.05);
+}
+
+.home-icon {
+  font-size: 30px;
+  text-decoration: none;
+  color: #f1f1f1;
+  background: rgba(44, 62, 80, 0.7);
+  padding: 10px 12px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-icon:hover {
+  background: rgba(52, 73, 94, 0.9);
+  transform: scale(1.1);
+}
+
+.home-icon svg {
+  transition: transform 0.3s ease;
+}
+
+.home-icon:hover svg {
+  transform: scale(1.1);
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-top: 30px;
+}
+
+p {
+  font-size: 18px;
+  text-align: left;
+  line-height: 1.6;
+  margin: 20px 0;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(7, 42px);
+  gap: 5px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.cell {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fdfdfd;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.7);
+}
+
+.orange { background-color: #d35400; }
+.pink   { background-color: #c03976; }
+.red    { background-color: #922b21; }
+.purple { background-color: #6c3483; }
+.blue   { background-color: #2980b9; }
+
+.mini-board {
+  display: grid;
+  grid-template-columns: repeat(5, 42px);
+  gap: 5px;
+  justify-content: center;
+  margin: 30px auto;
+  max-width: 300px;
+}
+
+.round {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #3498db;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.7);
+}
