@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Complete your Trio order and continue to secure payment."
+  >
+
+  <title>Checkout | Trio</title>
+
+  <link rel="stylesheet" href="checkout.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+</head>
+
+<body>
+
+  <main class="checkout-page">
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+    <div class="background-glow glow-three"></div>
+
+    <div class="math-background" aria-hidden="true">
+      <span class="math-symbol symbol-one">7 × 3</span>
+      <span class="math-symbol symbol-two">18 ÷ 2</span>
+      <span class="math-symbol symbol-three">9 + 6</span>
+      <span class="math-symbol symbol-four">24 − 8</span>
+      <span class="math-symbol symbol-five">3 × 5</span>
+    </div>
+
+    <nav class="navbar">
+
+      <a href="index.html" class="navbar-brand">
+        <img
+          src="trio-logo.png"
+          alt="Trio Logo"
+          class="navbar-logo"
+        >
+      </a>
+
+      <button
+        type="button"
+        class="mobile-menu-button"
+        id="mobileMenuButton"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="navigationLinks"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="navigation-links" id="navigationLinks">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="howtoplay.html">
+          How to Play
+        </a>
+
+        <a href="aboutus.html">
+          About Us
+        </a>
+
+        <a href="purchase.html">
+          Buy Trio
+        </a>
+
+        <a href="cart.html" class="cart-button">
+          <i class="fa-solid fa-cart-shopping"></i>
+
+          Cart
+
+          <span id="cart-count">0</span>
+        </a>
+
+      </div>
+
+    </nav>
+
+    <section class="checkout-header">
+
+      <span class="checkout-label">
+        <i class="fa-solid fa-lock"></i>
+        Secure Checkout
+      </span>
+
+      <h1>
+        Complete your
+        <span>Trio order.</span>
+      </h1>
+
+      <p>
+        Enter your contact and delivery information.
+        You will continue to iyzico for secure payment.
+      </p>
+
+      <div class="checkout-steps">
+
+        <div class="checkout-step active">
+          <span>1</span>
+          <strong>Order details</strong>
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="checkout-step">
+          <span>2</span>
+          <strong>Secure payment</strong>
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="checkout-step">
+          <span>3</span>
+          <strong>Confirmation</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="checkout-layout">
+
+      <form
+        class="checkout-form"
+        id="checkoutForm"
+        novalidate
+      >
+
+        <div class="form-heading">
+
+          <div>
+            <span class="section-number">
+              01
+            </span>
+
+            <h2>
+              Contact information
+            </h2>
+
+            <p>
+              We will use these details for your order
+              confirmation and delivery updates.
+            </p>
+          </div>
+
+          <i class="fa-regular fa-address-card"></i>
+
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="firstName">
+              First name
+            </label>
+
+            <div class="input-wrapper">
+              <i class="fa-regular fa-user"></i>
+
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                autocomplete="given-name"
+                placeholder="Hasan"
+                required
+              >
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">
+              Last name
+            </label>
+
+            <div class="input-wrapper">
+              <i class="fa-regular fa-user"></i>
+
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                autocomplete="family-name"
+                placeholder="Aydinoglu"
+                required
+              >
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="email">
+              Email address
+            </label>
+
+            <div class="input-wrapper">
+              <i class="fa-regular fa-envelope"></i>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                placeholder="name@example.com"
+                required
+              >
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">
+              Phone number
+            </label>
+
+            <div class="input-wrapper">
+              <i class="fa-solid fa-phone"></i>
+
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                autocomplete="tel"
+                placeholder="+90 5XX XXX XX XX"
+                required
+              >
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-heading">
+
+          <div>
+            <span class="section-number">
+              02
+            </span>
+
+            <h2>
+              Delivery address
+            </h2>
+
+            <p>
+              Enter the address where you want your Trio
+              game to be delivered.
+            </p>
+          </div>
+
+          <i class="fa-solid fa-location-dot"></i>
+
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group full-width">
+            <label for="address">
+              Street address
+            </label>
+
+            <div class="input-wrapper textarea-wrapper">
+              <i class="fa-solid fa-house"></i>
+
+              <textarea
+                id="address"
+                name="address"
+                autocomplete="street-address"
+                placeholder="Neighbourhood, street, building and apartment number"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="country">
+              Country
+            </label>
+
+            <div class="input-wrapper select-wrapper">
+              <i class="fa-solid fa-earth-europe"></i>
+
+              <select
+                id="country"
+                name="country"
+                autocomplete="country-name"
+                required
+              >
+                <option value="">
+                  Select country
+                </option>
+
+                <option value="Turkey">
+                  Turkey
+                </option>
+
+                <option value="United Kingdom">
+                  United Kingdom
+                </option>
+              </select>
+
+              <i class="fa-solid fa-chevron-down select-arrow"></i>
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="city">
+              City
+            </label>
+
+            <div class="input-wrapper">
+              <i class="fa-solid fa-city"></i>
+
+              <input
+                type="text"
+                id="city"
+                name="city"
+                autocomplete="address-level2"
+                placeholder="Istanbul"
+                required
+              >
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="district">
+              District
+            </label>
+
+            <div class="input-wrapper">
+              <i class="fa-solid fa-map-location-dot"></i>
+
+              <input
+                type="text"
+                id="district"
+                name="district"
+                autocomplete="address-level3"
+                placeholder="Ümraniye"
+                required
+              >
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="postalCode">
+              Postal code
+            </label>
+
+            <div class="input-wrapper">
+              <i class="fa-solid fa-envelopes-bulk"></i>
+
+              <input
+                type="text"
+                id="postalCode"
+                name="postalCode"
+                autocomplete="postal-code"
+                placeholder="34000"
+                required
+              >
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="orderNote">
+              Order note
+              <span>Optional</span>
+            </label>
+
+            <div class="input-wrapper textarea-wrapper">
+              <i class="fa-regular fa-message"></i>
+
+              <textarea
+                id="orderNote"
+                name="orderNote"
+                placeholder="Delivery instructions or additional notes"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+
+        </div>
+
+        <label class="agreement-row">
+
+          <input
+            type="checkbox"
+            id="agreement"
+            required
+          >
+
+          <span class="custom-checkbox">
+            <i class="fa-solid fa-check"></i>
+          </span>
+
+          <span>
+            I confirm that my order and delivery
+            information is correct.
+          </span>
+
+        </label>
+
+        <small
+          class="agreement-error"
+          id="agreementError"
+        ></small>
+
+        <button
+          type="submit"
+          class="payment-button"
+          id="paymentButton"
+        >
+          <span>
+            Continue to Secure Payment
+          </span>
+
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <div class="payment-security">
+
+          <div>
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <span>
+              Secure payment through iyzico
+            </span>
+          </div>
+
+          <div>
+            <i class="fa-solid fa-lock"></i>
+
+            <span>
+              Card details are not stored by Trio
+            </span>
+          </div>
+
+        </div>
+
+      </form>
+
+      <aside class="order-summary">
+
+        <div class="summary-heading">
+
+          <div>
+            <span>
+              YOUR ORDER
+            </span>
+
+            <h2>
+              Order summary
+            </h2>
+          </div>
+
+          <a href="purchase.html">
+            Edit
+          </a>
+
+        </div>
+
+        <div class="summary-product">
+
+          <div class="summary-image">
+
+            <img
+              src="trio-face.png"
+              alt="Trio Classic"
+            >
+
+            <span id="summaryQuantityBadge">
+              1
+            </span>
+
+          </div>
+
+          <div class="summary-product-info">
+
+            <strong>
+              Trio Classic
+            </strong>
+
+            <span>
+              Mathematical Strategy Game
+            </span>
+
+            <small>
+              Physical edition
+            </small>
+
+          </div>
+
+          <strong
+            class="summary-product-price"
+            id="summaryProductPrice"
+          >
+            £15
+          </strong>
+
+        </div>
+
+        <div class="summary-lines">
+
+          <div>
+            <span>
+              Quantity
+            </span>
+
+            <strong id="summaryQuantity">
+              1
+            </strong>
+          </div>
+
+          <div>
+            <span>
+              Subtotal
+            </span>
+
+            <strong id="summarySubtotal">
+              £15
+            </strong>
+          </div>
+
+          <div>
+            <span>
+              Shipping
+            </span>
+
+            <strong>
+              Calculated later
+            </strong>
+          </div>
+
+        </div>
+
+        <div class="summary-total">
+
+          <div>
+            <span>
+              Total
+            </span>
+
+            <small>
+              Excluding delivery charge
+            </small>
+          </div>
+
+          <strong id="summaryTotal">
+            £15
+          </strong>
+
+        </div>
+
+        <div class="summary-benefits">
+
+          <div>
+            <i class="fa-solid fa-lock"></i>
+
+            <span>
+              Secure iyzico checkout
+            </span>
+          </div>
+
+          <div>
+            <i class="fa-solid fa-box"></i>
+
+            <span>
+              Physical Trio board game
+            </span>
+          </div>
+
+          <div>
+            <i class="fa-solid fa-envelope"></i>
+
+            <span>
+              Email order confirmation
+            </span>
+          </div>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+    <footer class="footer">
+
+      <div class="footer-brand">
+
+        <img
+          src="trio-logo.png"
+          alt="Trio Logo"
+        >
+
+        <span>
+          TRIO
+        </span>
+
+      </div>
+
+      <p>
+        © 2026 Trio. All rights reserved.
+      </p>
+
+      <div class="social-links">
+
+        <a href="#" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="#" aria-label="TikTok">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+
+        <a href="#" aria-label="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+  <script src="checkout.js"></script>
+
+</body>
+</html>

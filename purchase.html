@@ -2,36 +2,442 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Buy Trio</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Buy the Trio mathematical strategy board game."
+  >
+
+  <title>Buy Trio | Mathematical Strategy Game</title>
+
   <link rel="stylesheet" href="purchase.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
 </head>
+
 <body>
 
-<div class="purchase-hero">
-  <nav class="purchase-navbar">
-    <h2>Trio</h2>
-    <div class="purchase-buttons">
-      <button onclick="window.location.href='index.html'">Home</button>
-      <button onclick="window.location.href='cart.html'">
-        <i class="fas fa-shopping-cart"></i> Cart 
-        <span id="cart-count">0</span>
+  <main class="purchase-page">
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+    <div class="background-glow glow-three"></div>
+
+    <div class="math-background" aria-hidden="true">
+      <span class="math-symbol symbol-one">7 × 3</span>
+      <span class="math-symbol symbol-two">18 ÷ 2</span>
+      <span class="math-symbol symbol-three">9 + 6</span>
+      <span class="math-symbol symbol-four">24 − 8</span>
+      <span class="math-symbol symbol-five">3 × 5</span>
+      <span class="math-symbol symbol-six">16 ÷ 4</span>
+    </div>
+
+    <nav class="navbar">
+
+      <a href="index.html" class="navbar-brand">
+        <img
+          src="trio-logo.png"
+          alt="Trio Logo"
+          class="navbar-logo"
+        >
+      </a>
+
+      <button
+        type="button"
+        class="mobile-menu-button"
+        id="mobileMenuButton"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="navigationLinks"
+      >
+        <i class="fa-solid fa-bars"></i>
       </button>
+
+      <div class="navigation-links" id="navigationLinks">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="howtoplay.html">
+          How to Play
+        </a>
+
+        <a href="aboutus.html">
+          About Us
+        </a>
+
+        <a href="cart.html" class="cart-button">
+          <i class="fa-solid fa-cart-shopping"></i>
+
+          Cart
+
+          <span id="cart-count">0</span>
+        </a>
+
+      </div>
+
+    </nav>
+
+    <section class="purchase-hero">
+
+      <div class="product-gallery">
+
+        <div class="gallery-badge">
+          <i class="fa-solid fa-star"></i>
+          Physical Board Game
+        </div>
+
+        <div class="main-product-image">
+
+          <div class="image-glow"></div>
+
+          <img
+            src="trio-face.png"
+            alt="Front view of the Trio mathematical strategy game"
+            id="mainProductImage"
+          >
+
+          <span class="floating-card card-one">
+            12
+          </span>
+
+          <span class="floating-card card-two">
+            ×
+          </span>
+
+          <span class="floating-card card-three">
+            4
+          </span>
+
+        </div>
+
+        <div class="product-thumbnails">
+
+          <button
+            type="button"
+            class="thumbnail-button active"
+            data-image="trio-face.png"
+            aria-label="Show front of Trio box"
+          >
+            <img
+              src="trio-face.png"
+              alt="Trio box front"
+            >
+          </button>
+
+          <button
+            type="button"
+            class="thumbnail-button"
+            data-image="trio-back.png"
+            aria-label="Show back of Trio box"
+          >
+            <img
+              src="trio-back.png"
+              alt="Trio box back"
+            >
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="product-information">
+
+        <span class="product-label">
+          <i class="fa-solid fa-shapes"></i>
+          Think. Calculate. Win.
+        </span>
+
+        <h1>
+          Trio
+          <span>Classic Edition</span>
+        </h1>
+
+        <p class="product-description">
+          A fast, strategic and educational mathematics game
+          where players combine three numbers to reach the
+          target before their opponents.
+        </p>
+
+        <div class="rating-row">
+
+          <div class="stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+
+          <span>Mathematical strategy game</span>
+
+        </div>
+
+        <div class="feature-grid">
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+
+            <div>
+              <strong>Strategic Thinking</strong>
+              <span>Build fast and creative solutions.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fa-solid fa-user-group"></i>
+            </div>
+
+            <div>
+              <strong>Social Gameplay</strong>
+              <span>Compete with family and friends.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+
+            <div>
+              <strong>Learn Through Play</strong>
+              <span>Improve mental arithmetic skills.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fa-solid fa-box-open"></i>
+            </div>
+
+            <div>
+              <strong>Physical Edition</strong>
+              <span>A complete boxed board game.</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="purchase-panel">
+
+          <div class="price-row">
+            <div>
+              <span class="price-label">Price</span>
+
+              <div class="price">
+                <span class="currency">£</span>
+                <span id="unitPrice">15</span>
+              </div>
+            </div>
+
+            <span class="stock-badge">
+              <i class="fa-solid fa-circle-check"></i>
+              In stock
+            </span>
+          </div>
+
+          <div class="quantity-section">
+
+            <div>
+              <label for="quantity">
+                Quantity
+              </label>
+
+              <span>Select the number of games</span>
+            </div>
+
+            <div class="quantity-control">
+
+              <button
+                type="button"
+                id="decreaseQuantity"
+                aria-label="Decrease quantity"
+              >
+                <i class="fa-solid fa-minus"></i>
+              </button>
+
+              <input
+                type="number"
+                id="quantity"
+                value="1"
+                min="1"
+                max="10"
+                readonly
+              >
+
+              <button
+                type="button"
+                id="increaseQuantity"
+                aria-label="Increase quantity"
+              >
+                <i class="fa-solid fa-plus"></i>
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="total-row">
+            <span>Total</span>
+
+            <strong>
+              £<span id="totalPrice">15</span>
+            </strong>
+          </div>
+
+          <div class="purchase-actions">
+
+            <button
+              type="button"
+              class="buy-now-button"
+              id="buyNowButton"
+            >
+              Buy Now
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <button
+              type="button"
+              class="add-cart-button"
+              id="addCartButton"
+            >
+              <i class="fa-solid fa-cart-plus"></i>
+              Add to Cart
+            </button>
+
+          </div>
+
+          <div class="secure-payment">
+
+            <div>
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <p>
+              <strong>Secure checkout</strong>
+              Payment will be processed securely through iyzico.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="purchase-details">
+
+      <article class="detail-card">
+
+        <div class="detail-icon">
+          <i class="fa-solid fa-cube"></i>
+        </div>
+
+        <h3>Inside the Box</h3>
+
+        <p>
+          Everything required to begin playing Trio with
+          family, friends or students.
+        </p>
+
+      </article>
+
+      <article class="detail-card">
+
+        <div class="detail-icon">
+          <i class="fa-solid fa-truck-fast"></i>
+        </div>
+
+        <h3>Secure Delivery</h3>
+
+        <p>
+          Your order details and delivery address will be
+          collected securely during checkout.
+        </p>
+
+      </article>
+
+      <article class="detail-card">
+
+        <div class="detail-icon">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+
+        <h3>Protected Payment</h3>
+
+        <p>
+          Card information is handled through the iyzico
+          payment infrastructure.
+        </p>
+
+      </article>
+
+    </section>
+
+    <footer class="footer">
+
+      <div class="footer-brand">
+        <img
+          src="trio-logo.png"
+          alt="Trio Logo"
+        >
+
+        <span>TRIO</span>
+      </div>
+
+      <p>
+        © 2026 Trio. All rights reserved.
+      </p>
+
+      <div class="social-links">
+
+        <a href="#" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="#" aria-label="TikTok">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+
+        <a href="#" aria-label="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+
+      </div>
+
+    </footer>
+
+    <div class="cart-notification" id="cartNotification">
+
+      <div class="notification-icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+
+      <div>
+        <strong>Added to cart</strong>
+        <span id="notificationMessage">
+          Trio Classic has been added.
+        </span>
+      </div>
+
     </div>
-  </nav>
 
-  <div class="products-container">
-    <div class="product-card">
-      <h3>Trio Classic</h3>
-      <p>Classic edition of Trio board game.</p>
-      <button class="add-cart-btn" onclick="addToCart('Trio Classic', 15)">Add to Cart (£15)</button>
+  </main>
 
-      <button class="buy-now-btn">Buy Now</button>
-    </div>
-  </div>
+  <script src="purchase.js"></script>
 
-</div>
-
-<script src="purchase.js"></script>
 </body>
 </html>
