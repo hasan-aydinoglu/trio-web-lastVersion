@@ -1,477 +1,518 @@
-const { setGlobalOptions } = require("firebase-functions/v2");
-const { onRequest } = require("firebase-functions/v2/https");
-const { defineSecret } = require("firebase-functions/params");
-const logger = require("firebase-functions/logger");
+'use strict';
 
-const admin = require("firebase-admin");
-const Iyzipay = require("iyzipay");
-const cors = require("cors")({
+const { onRequest } = require(
+  'firebase-functions/v2/https'
+);
+
+const {
+  defineSecret,
+  defineString,
+} = require('firebase-functions/params');
+
+const logger = require('firebase-functions/logger');
+const Iyzipay = require('iyzipay');
+const cors = require('cors');
+
+const corsHandler = cors({
   origin: [
-    "https://trio-game.com",
-    "https://www.trio-game.com",
-    "https://trio-app-e3bea.web.app",
-    "https://trio-app-e3bea.firebaseapp.com",
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
+    'https://trio-game.com',
+    'https://www.trio-game.com',
+    'https://trio-app-e3bea.web.app',
+    'http://localhost:5000',
+    'http://127.0.0.1:5000',
   ],
-  methods: ["POST", "OPTIONS"],
+  methods: ['POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
 });
 
-admin.initializeApp();
-
-const db = admin.firestore();
-
-setGlobalOptions({
-  region: "us-central1",
-  maxInstances: 10,
-});
-
-const IYZICO_API_KEY = defineSecret("IYZICO_API_KEY");
-const IYZICO_SECRET_KEY = defineSecret("IYZICO_SECRET_KEY");
-
-const IYZICO_BASE_URL = "https://sandbox-api.iyzipay.com";
-
-const CALLBACK_URL =
-  "https://us-central1-trio-app-e3bea.cloudfunctions.net/iyzicoCallback";
-
-const SUCCESS_URL = "https://trio-game.com/payment-success.html";
-const FAILURE_URL = "https://trio-game.com/payment-failed.html";
+const IYZICO_API_KEY = defineSecret('IYZICO_API_KEY');
+const IYZICO_SECRET_KEY = defineSecret('IYZICO_SECRET_KEY');
 
 /*
- * Buradaki fiyatı Trio'nun gerçek TL satış fiyatına göre değiştir.
- * Örnek olarak 499 TL yazılmıştır.
+ * Sandbox:
+ * https://sandbox-api.iyzipay.com
+ *
+ * Production:
+ * https://api.iyzipay.com
  */
-const TRIO_UNIT_PRICE = 499;
+const IYZICO_BASE_URL = defineString('IYZICO_BASE_URL', {
+  default: 'https://sandbox-api.iyzipay.com',
+});
 
-function createIyzipayClient() {
+/*
+ * Deploy sonrası callback function URL'sini buraya
+ * Firebase parametresi olarak vereceğiz.
+ *
+ * Örnek:
+ * https://europe-west1-trio-app-e3bea.cloudfunctions.net/iyzicoCallback
+ */
+const IYZICO_CALLBACK_URL = defineString(
+  'IYZICO_CALLBACK_URL'
+);
+
+const WEBSITE_URL = defineString('WEBSITE_URL', {
+  default: 'https://trio-game.com',
+});
+
+/*
+ * Frontend tarafından gönderilen fiyatlara güvenilmez.
+ * Gerçek fiyat yalnızca backend kataloğunda bulunur.
+ */
+const PRODUCT_CATALOG = Object.freeze({
+  'trio-classic': {
+    id: 'trio-classic',
+    name: 'Trio Classic Edition',
+    category1: 'Board Games',
+    category2: 'Educational Games',
+    unitPrice: 15,
+  },
+});
+
+function createIyzicoClient() {
   return new Iyzipay({
     apiKey: IYZICO_API_KEY.value(),
     secretKey: IYZICO_SECRET_KEY.value(),
-    uri: IYZICO_BASE_URL,
+    uri: IYZICO_BASE_URL.value(),
   });
 }
 
-function cleanText(value, maximumLength = 250) {
-  return String(value || "")
+function createCheckoutForm(iyzipay, request) {
+  return new Promise((resolve, reject) => {
+    iyzipay.checkoutFormInitialize.create(
+      request,
+      (error, result) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve(result);
+      }
+    );
+  });
+}
+
+function retrieveCheckoutForm(iyzipay, request) {
+  return new Promise((resolve, reject) => {
+    iyzipay.checkoutForm.retrieve(
+      request,
+      (error, result) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve(result);
+      }
+    );
+  });
+}
+
+function cleanText(value, maxLength) {
+  if (typeof value !== 'string') {
+    return '';
+  }
+
+  return value
     .trim()
-    .slice(0, maximumLength);
+    .replace(/[<>]/g, '')
+    .slice(0, maxLength);
 }
 
-function normalizePhone(value) {
-  let phone = String(value || "").replace(/[^\d+]/g, "");
-
-  if (phone.startsWith("0090")) {
-    phone = `+90${phone.slice(4)}`;
-  }
-
-  if (phone.startsWith("0") && phone.length === 11) {
-    phone = `+90${phone.slice(1)}`;
-  }
-
-  if (!phone.startsWith("+")) {
-    phone = `+${phone}`;
-  }
-
-  return phone;
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function generateOrderId() {
-  const timestamp = Date.now();
-  const randomPart = Math.random().toString(36).slice(2, 8).toUpperCase();
-
-  return `TRIO-${timestamp}-${randomPart}`;
+function normalizePhone(phone) {
+  return cleanText(phone, 25)
+    .replace(/[^\d+]/g, '');
 }
 
-function validateCheckoutRequest(body) {
-  const requiredFields = [
-    "firstName",
-    "lastName",
-    "email",
-    "phone",
-    "address",
-    "city",
-  ];
+function validateCustomer(rawCustomer) {
+  const customer = {
+    firstName: cleanText(rawCustomer?.firstName, 50),
+    lastName: cleanText(rawCustomer?.lastName, 50),
+    email: cleanText(rawCustomer?.email, 100).toLowerCase(),
+    phone: normalizePhone(rawCustomer?.phone),
+    identityNumber: cleanText(
+      rawCustomer?.identityNumber,
+      20
+    ),
+    address: cleanText(rawCustomer?.address, 250),
+    city: cleanText(rawCustomer?.city, 80),
+    zipCode: cleanText(rawCustomer?.zipCode, 20),
+    country: cleanText(rawCustomer?.country, 80),
+  };
 
-  const missingFields = requiredFields.filter(
-    (field) => !cleanText(body[field]),
-  );
+  const missingFields = Object.entries(customer)
+    .filter(([, value]) => !value)
+    .map(([key]) => key);
 
   if (missingFields.length > 0) {
-    return `Eksik alanlar: ${missingFields.join(", ")}`;
+    throw new Error(
+      `Missing customer fields: ${missingFields.join(', ')}`
+    );
   }
 
-  const email = cleanText(body.email);
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return "Geçerli bir e-posta adresi girilmelidir.";
+  if (!isValidEmail(customer.email)) {
+    throw new Error('Please enter a valid email address.');
   }
 
-  const quantity = Number(body.quantity);
-
-  if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10) {
-    return "Ürün adedi 1 ile 10 arasında olmalıdır.";
+  if (customer.phone.length < 7) {
+    throw new Error('Please enter a valid phone number.');
   }
 
-  return null;
+  if (customer.identityNumber.length < 5) {
+    throw new Error('Please enter a valid identity number.');
+  }
+
+  return customer;
+}
+
+function buildBasket(rawItems) {
+  if (!Array.isArray(rawItems) || rawItems.length === 0) {
+    throw new Error('The shopping cart is empty.');
+  }
+
+  if (rawItems.length > 10) {
+    throw new Error('Too many cart items.');
+  }
+
+  const basketItems = [];
+  let totalPrice = 0;
+
+  rawItems.forEach((rawItem) => {
+    const product = PRODUCT_CATALOG[rawItem?.id];
+
+    if (!product) {
+      throw new Error('An invalid product was submitted.');
+    }
+
+    const quantity = Number(rawItem.quantity);
+
+    if (
+      !Number.isInteger(quantity) ||
+      quantity < 1 ||
+      quantity > 10
+    ) {
+      throw new Error('Invalid product quantity.');
+    }
+
+    /*
+     * iyzico basket item fiyatı ürün satırının toplamıdır.
+     * Bir ürün 2 adet ise 15 × 2 = 30 gönderilir.
+     */
+    const linePrice = product.unitPrice * quantity;
+
+    totalPrice += linePrice;
+
+    basketItems.push({
+      id: `${product.id}-${quantity}`,
+      name:
+        quantity > 1
+          ? `${product.name} × ${quantity}`
+          : product.name,
+      category1: product.category1,
+      category2: product.category2,
+      itemType: Iyzipay.BASKET_ITEM_TYPE.PHYSICAL,
+      price: linePrice.toFixed(2),
+    });
+  });
+
+  return {
+    basketItems,
+    totalPrice: totalPrice.toFixed(2),
+  };
+}
+
+function getClientIp(request) {
+  const forwardedFor = request.headers['x-forwarded-for'];
+
+  if (typeof forwardedFor === 'string') {
+    return forwardedFor.split(',')[0].trim();
+  }
+
+  return request.ip || '127.0.0.1';
+}
+
+function createConversationId() {
+  const timestamp = Date.now();
+
+  const randomPart = Math.random()
+    .toString(36)
+    .slice(2, 10);
+
+  return `TRIO-${timestamp}-${randomPart}`.toUpperCase();
+}
+
+function redirectToResult(response, page, parameters = {}) {
+  const resultUrl = new URL(
+    page,
+    `${WEBSITE_URL.value().replace(/\/+$/, '')}/`
+  );
+
+  Object.entries(parameters).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      resultUrl.searchParams.set(key, String(value));
+    }
+  });
+
+  response.redirect(303, resultUrl.toString());
 }
 
 exports.createIyzicoCheckout = onRequest(
   {
-    secrets: [IYZICO_API_KEY, IYZICO_SECRET_KEY],
+    region: 'europe-west1',
+    cors: false,
+    secrets: [
+      IYZICO_API_KEY,
+      IYZICO_SECRET_KEY,
+    ],
     timeoutSeconds: 60,
-    memory: "256MiB",
+    memory: '256MiB',
   },
-  (request, response) => {
-    cors(request, response, async () => {
-      if (request.method === "OPTIONS") {
-        response.status(204).send("");
+
+  async (request, response) => {
+    corsHandler(request, response, async () => {
+      if (request.method === 'OPTIONS') {
+        response.status(204).send('');
         return;
       }
 
-      if (request.method !== "POST") {
+      if (request.method !== 'POST') {
         response.status(405).json({
           success: false,
-          message: "Yalnızca POST isteği kullanılabilir.",
+          message: 'Method not allowed.',
         });
         return;
       }
 
       try {
-        const body = request.body || {};
-        const validationError = validateCheckoutRequest(body);
-
-        if (validationError) {
-          response.status(400).json({
-            success: false,
-            message: validationError,
-          });
-          return;
-        }
-
-        const quantity = Number(body.quantity);
-        const totalPrice = TRIO_UNIT_PRICE * quantity;
-        const orderId = generateOrderId();
-
-        const firstName = cleanText(body.firstName, 50);
-        const lastName = cleanText(body.lastName, 50);
-        const email = cleanText(body.email, 120).toLowerCase();
-        const phone = normalizePhone(body.phone);
-        const address = cleanText(body.address, 500);
-        const city = cleanText(body.city, 100);
-        const district = cleanText(body.district || city, 100);
-        const postalCode = cleanText(body.postalCode || "34000", 20);
-        const note = cleanText(body.note, 500);
-
-        /*
-         * Sandbox testlerinde 11111111111 kullanılabilir.
-         * Canlı ortamda müşterinin gerçek ve geçerli kimlik bilgisi
-         * veya iyzico hesabınıza uygun alıcı bilgisi kullanılmalıdır.
-         */
-        const identityNumber = cleanText(
-          body.identityNumber || "11111111111",
-          11,
+        const customer = validateCustomer(
+          request.body?.customer
         );
 
-        const orderReference = db.collection("orders").doc(orderId);
+        const { basketItems, totalPrice } = buildBasket(
+          request.body?.items
+        );
 
-        await orderReference.set({
-          orderId,
-          status: "payment_pending",
-          environment: "sandbox",
-          product: {
-            id: "TRIO-CLASSIC",
-            name: "Trio Classic",
-            category: "Board Game",
-            quantity,
-            unitPrice: TRIO_UNIT_PRICE,
-            totalPrice,
-            currency: "TRY",
-          },
-          customer: {
-            firstName,
-            lastName,
-            email,
-            phone,
-            identityNumber,
-          },
-          shippingAddress: {
-            address,
-            city,
-            district,
-            postalCode,
-            country: "Türkiye",
-          },
-          note,
-          createdAt: admin.firestore.FieldValue.serverTimestamp(),
-          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-        });
-
-        const iyzipay = createIyzipayClient();
+        const conversationId = createConversationId();
+        const buyerId = conversationId;
 
         const iyzicoRequest = {
-          locale: Iyzipay.LOCALE.TR,
-          conversationId: orderId,
-          price: totalPrice.toFixed(2),
-          paidPrice: totalPrice.toFixed(2),
-          currency: Iyzipay.CURRENCY.TRY,
-          basketId: orderId,
+          locale: Iyzipay.LOCALE.EN,
+          conversationId,
+          price: totalPrice,
+          paidPrice: totalPrice,
+          currency: Iyzipay.CURRENCY.GBP,
+          basketId: conversationId,
           paymentGroup: Iyzipay.PAYMENT_GROUP.PRODUCT,
-          callbackUrl: CALLBACK_URL,
+          callbackUrl: IYZICO_CALLBACK_URL.value(),
           enabledInstallments: [1],
 
           buyer: {
-            id: orderId,
-            name: firstName,
-            surname: lastName,
-            gsmNumber: phone,
-            email,
-            identityNumber,
-            registrationAddress: address,
-            ip: request.ip || "127.0.0.1",
-            city,
-            country: "Turkey",
-            zipCode: postalCode,
+            id: buyerId,
+            name: customer.firstName,
+            surname: customer.lastName,
+            gsmNumber: customer.phone,
+            email: customer.email,
+            identityNumber: customer.identityNumber,
+            lastLoginDate:
+              new Date().toISOString().slice(0, 19).replace('T', ' '),
+            registrationDate:
+              new Date().toISOString().slice(0, 19).replace('T', ' '),
+            registrationAddress: customer.address,
+            ip: getClientIp(request),
+            city: customer.city,
+            country: customer.country,
+            zipCode: customer.zipCode,
           },
 
           shippingAddress: {
-            contactName: `${firstName} ${lastName}`,
-            city,
-            country: "Turkey",
-            address,
-            zipCode: postalCode,
+            contactName:
+              `${customer.firstName} ${customer.lastName}`,
+            city: customer.city,
+            country: customer.country,
+            address: customer.address,
+            zipCode: customer.zipCode,
           },
 
           billingAddress: {
-            contactName: `${firstName} ${lastName}`,
-            city,
-            country: "Turkey",
-            address,
-            zipCode: postalCode,
+            contactName:
+              `${customer.firstName} ${customer.lastName}`,
+            city: customer.city,
+            country: customer.country,
+            address: customer.address,
+            zipCode: customer.zipCode,
           },
 
-          basketItems: [
-            {
-              id: "TRIO-CLASSIC",
-              name: "Trio Classic",
-              category1: "Board Games",
-              category2: "Educational Games",
-              itemType: Iyzipay.BASKET_ITEM_TYPE.PHYSICAL,
-              price: totalPrice.toFixed(2),
-            },
-          ],
+          basketItems,
         };
 
-        iyzipay.checkoutFormInitialize.create(
-          iyzicoRequest,
-          async (error, result) => {
-            if (error) {
-              logger.error("iyzico Checkout Form error", error);
+        const iyzipay = createIyzicoClient();
 
-              await orderReference.update({
-                status: "checkout_initialization_failed",
-                errorMessage: error.message || String(error),
-                updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-              });
-
-              response.status(500).json({
-                success: false,
-                message: "Ödeme sayfası oluşturulamadı.",
-              });
-
-              return;
-            }
-
-            if (!result || result.status !== "success") {
-              logger.error("iyzico Checkout Form failed", result);
-
-              await orderReference.update({
-                status: "checkout_initialization_failed",
-                iyzicoErrorCode: result?.errorCode || null,
-                iyzicoErrorMessage: result?.errorMessage || null,
-                updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-              });
-
-              response.status(400).json({
-                success: false,
-                message:
-                  result?.errorMessage ||
-                  "iyzico ödeme sayfası oluşturulamadı.",
-              });
-
-              return;
-            }
-
-            await orderReference.update({
-              status: "checkout_initialized",
-              iyzicoToken: result.token,
-              paymentPageUrl: result.paymentPageUrl || null,
-              updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-            });
-
-            response.status(200).json({
-              success: true,
-              orderId,
-              token: result.token,
-              paymentPageUrl: result.paymentPageUrl,
-              checkoutFormContent: result.checkoutFormContent,
-            });
-          },
+        const result = await createCheckoutForm(
+          iyzipay,
+          iyzicoRequest
         );
-      } catch (error) {
-        logger.error("createIyzicoCheckout unexpected error", error);
 
-        response.status(500).json({
+        if (
+          result.status !== 'success' ||
+          !result.paymentPageUrl ||
+          !result.token
+        ) {
+          logger.error('iyzico checkout initialization failed', {
+            status: result.status,
+            errorCode: result.errorCode,
+            errorMessage: result.errorMessage,
+            conversationId,
+          });
+
+          response.status(400).json({
+            success: false,
+            message:
+              result.errorMessage ||
+              'The payment page could not be created.',
+          });
+
+          return;
+        }
+
+        logger.info('iyzico checkout initialized', {
+          conversationId,
+          token: result.token,
+          totalPrice,
+        });
+
+        response.status(200).json({
+          success: true,
+          paymentPageUrl: result.paymentPageUrl,
+        });
+      } catch (error) {
+        logger.error('Checkout initialization error', error);
+
+        response.status(400).json({
           success: false,
-          message: "Beklenmeyen bir sunucu hatası oluştu.",
+          message:
+            error.message ||
+            'Payment could not be started.',
         });
       }
     });
-  },
+  }
 );
 
 exports.iyzicoCallback = onRequest(
   {
-    secrets: [IYZICO_API_KEY, IYZICO_SECRET_KEY],
+    region: 'europe-west1',
+    cors: false,
+    secrets: [
+      IYZICO_API_KEY,
+      IYZICO_SECRET_KEY,
+    ],
     timeoutSeconds: 60,
-    memory: "256MiB",
+    memory: '256MiB',
   },
+
   async (request, response) => {
-    if (request.method !== "POST") {
-      response.status(405).send("Method Not Allowed");
+    if (request.method !== 'POST') {
+      response.status(405).send('Method not allowed.');
       return;
     }
 
     try {
-      const token =
-        cleanText(request.body?.token, 500) ||
-        cleanText(request.query?.token, 500);
+      /*
+       * iyzico callback isteğinde token gönderir.
+       * Firebase/Express form body veya JSON body'yi
+       * request.body içerisinde okuyabilir.
+       */
+      const token = cleanText(
+        request.body?.token,
+        200
+      );
 
       if (!token) {
-        logger.error("iyzico callback token missing");
+        logger.error('iyzico callback token is missing');
 
-        response.redirect(
-          303,
-          `${FAILURE_URL}?reason=missing-token`,
+        redirectToResult(
+          response,
+          'payment-failed.html',
+          {
+            reason: 'missing-token',
+          }
         );
 
         return;
       }
 
-      const iyzipay = createIyzipayClient();
+      const iyzipay = createIyzicoClient();
 
-      iyzipay.checkoutForm.retrieve(
+      const result = await retrieveCheckoutForm(
+        iyzipay,
         {
-          locale: Iyzipay.LOCALE.TR,
+          locale: Iyzipay.LOCALE.EN,
           token,
-        },
-        async (error, result) => {
-          if (error) {
-            logger.error("iyzico payment retrieve error", error);
+        }
+      );
 
-            response.redirect(
-              303,
-              `${FAILURE_URL}?reason=verification-error`,
-            );
+      const paymentSuccessful =
+        result.status === 'success' &&
+        result.paymentStatus === 'SUCCESS';
 
-            return;
+      if (!paymentSuccessful) {
+        logger.error('iyzico payment verification failed', {
+          status: result.status,
+          paymentStatus: result.paymentStatus,
+          errorCode: result.errorCode,
+          errorMessage: result.errorMessage,
+          conversationId: result.conversationId,
+        });
+
+        redirectToResult(
+          response,
+          'payment-failed.html',
+          {
+            reason:
+              result.errorCode ||
+              result.paymentStatus ||
+              'payment-failed',
           }
+        );
 
-          const orderId = cleanText(result?.conversationId, 150);
-          const paymentSuccessful =
-            result?.status === "success" &&
-            result?.paymentStatus === "SUCCESS";
+        return;
+      }
 
-          if (!orderId) {
-            logger.error("Order ID missing in iyzico result", result);
+      logger.info('Trio payment verified successfully', {
+        conversationId: result.conversationId,
+        paymentId: result.paymentId,
+        price: result.price,
+        paidPrice: result.paidPrice,
+        currency: result.currency,
+      });
 
-            response.redirect(
-              303,
-              `${FAILURE_URL}?reason=order-not-found`,
-            );
+      /*
+       * Burada daha sonra Firestore'a sipariş kaydı
+       * ekleyebilir veya sipariş e-postası gönderebilirsin.
+       *
+       * Önemli:
+       * Sipariş teslimatına başlamadan önce burada doğrulanan
+       * paymentStatus değerini kullanmalısın.
+       */
 
-            return;
-          }
-
-          const orderReference = db.collection("orders").doc(orderId);
-          const orderSnapshot = await orderReference.get();
-
-          if (!orderSnapshot.exists) {
-            logger.error("Order does not exist", { orderId });
-
-            response.redirect(
-              303,
-              `${FAILURE_URL}?reason=order-not-found`,
-            );
-
-            return;
-          }
-
-          const orderData = orderSnapshot.data();
-          const expectedPrice = Number(
-            orderData?.product?.totalPrice || 0,
-          );
-
-          const returnedPrice = Number(
-            result?.paidPrice || result?.price || 0,
-          );
-
-          const priceMatches =
-            Math.abs(expectedPrice - returnedPrice) < 0.01;
-
-          if (paymentSuccessful && priceMatches) {
-            await orderReference.update({
-              status: "paid",
-              paymentStatus: result.paymentStatus,
-              paymentId: result.paymentId || null,
-              paymentConversationId: result.conversationId || null,
-              iyzicoToken: token,
-              paidPrice: returnedPrice,
-              currency: result.currency || "TRY",
-              cardType: result.cardType || null,
-              cardAssociation: result.cardAssociation || null,
-              cardFamily: result.cardFamily || null,
-              binNumber: result.binNumber || null,
-              lastFourDigits: result.lastFourDigits || null,
-              fraudStatus: result.fraudStatus ?? null,
-              paymentCompletedAt:
-                admin.firestore.FieldValue.serverTimestamp(),
-              updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-            });
-
-            response.redirect(
-              303,
-              `${SUCCESS_URL}?orderId=${encodeURIComponent(orderId)}`,
-            );
-
-            return;
-          }
-
-          await orderReference.update({
-            status: priceMatches
-              ? "payment_failed"
-              : "payment_amount_mismatch",
-            paymentStatus: result?.paymentStatus || null,
-            iyzicoStatus: result?.status || null,
-            iyzicoErrorCode: result?.errorCode || null,
-            iyzicoErrorMessage: result?.errorMessage || null,
-            returnedPrice,
-            expectedPrice,
-            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-          });
-
-          response.redirect(
-            303,
-            `${FAILURE_URL}?orderId=${encodeURIComponent(orderId)}`,
-          );
-        },
+      redirectToResult(
+        response,
+        'payment-success.html'
       );
     } catch (error) {
-      logger.error("iyzicoCallback unexpected error", error);
+      logger.error('iyzico callback error', error);
 
-      response.redirect(
-        303,
-        `${FAILURE_URL}?reason=server-error`,
+      redirectToResult(
+        response,
+        'payment-failed.html',
+        {
+          reason: 'verification-error',
+        }
       );
     }
-  },
+  }
 );

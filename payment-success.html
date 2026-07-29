@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Payment Successful | Trio</title>
+
+  <link rel="stylesheet" href="payment-result.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+</head>
+
+<body>
+
+  <main class="result-page">
+
+    <section class="result-card success">
+
+      <img
+        src="trio-logo.png"
+        alt="Trio Logo"
+        class="result-logo"
+      >
+
+      <div class="result-icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+
+      <span class="result-label">
+        Payment successful
+      </span>
+
+      <h1>Thank you for your order</h1>
+
+      <p>
+        Your Trio payment was completed successfully.
+        We have received your order.
+      </p>
+
+      <div class="result-information">
+        <i class="fa-solid fa-box"></i>
+
+        <span>
+          Your delivery information will be used to prepare
+          your Trio order.
+        </span>
+      </div>
+
+      <div class="result-actions">
+
+        <a href="index.html" class="primary-link">
+          Return Home
+        </a>
+
+        <a href="purchase.html" class="secondary-link">
+          View Trio
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    /*
+     * Bu sayfaya yalnızca backend ödeme sonucunu başarılı
+     * doğruladıktan sonra yönlendirme yapar.
+     */
+    localStorage.removeItem('trioCart');
+  </script>
+
+</body>
+</html>

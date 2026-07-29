@@ -2,28 +2,333 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Your Cart</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Review your Trio order and continue to secure payment."
+  >
+
+  <title>Cart | Trio</title>
+
   <link rel="stylesheet" href="cart.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
 </head>
+
 <body>
 
-<div class="cart-hero">
-  <nav class="purchase-navbar">
-    <h2>Trio</h2>
-    <div class="purchase-buttons">
-      <button onclick="window.location.href='index.html'">Home</button>
-      <button onclick="window.location.href='purchase.html'">Buy Trio</button>
-    </div>
-  </nav>
+  <main class="cart-page">
 
-  <div class="cart-container">
-    <h2>Your Cart</h2>
-    <div id="cart-items"></div>
-    <div id="total"></div>
-    <button class="confirm-btn" onclick="confirmOrder()">Confirm & Pay</button>
-  </div>
-</div>
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
 
-<script src="cart.js"></script>
+    <nav class="navbar">
+
+      <a href="index.html" class="navbar-brand">
+        <img
+          src="trio-logo.png"
+          alt="Trio Logo"
+        >
+      </a>
+
+      <div class="navigation-links">
+        <a href="index.html">Home</a>
+        <a href="purchase.html">Continue Shopping</a>
+      </div>
+
+    </nav>
+
+    <section class="cart-header">
+
+      <span class="section-label">
+        <i class="fa-solid fa-cart-shopping"></i>
+        Secure checkout
+      </span>
+
+      <h1>Your Trio order</h1>
+
+      <p>
+        Review your order and enter your delivery information.
+      </p>
+
+    </section>
+
+    <section class="checkout-layout">
+
+      <div class="cart-column">
+
+        <div class="section-card">
+
+          <div class="card-heading">
+            <div>
+              <span>Order</span>
+              <h2>Shopping cart</h2>
+            </div>
+
+            <span id="cartItemCount">0 items</span>
+          </div>
+
+          <div id="cartItems" class="cart-items"></div>
+
+          <div
+            id="emptyCart"
+            class="empty-cart"
+            hidden
+          >
+            <i class="fa-solid fa-cart-arrow-down"></i>
+
+            <h3>Your cart is empty</h3>
+
+            <p>
+              Add Trio Classic Edition before continuing.
+            </p>
+
+            <a href="purchase.html">
+              View Trio
+            </a>
+          </div>
+
+          <div
+            id="orderSummary"
+            class="order-summary"
+          >
+
+            <div>
+              <span>Subtotal</span>
+              <strong>£<span id="subtotal">0.00</span></strong>
+            </div>
+
+            <div>
+              <span>Delivery</span>
+              <strong>Calculated at checkout</strong>
+            </div>
+
+            <div class="summary-total">
+              <span>Total</span>
+              <strong>£<span id="grandTotal">0.00</span></strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="checkout-column">
+
+        <form
+          id="checkoutForm"
+          class="section-card checkout-form"
+          novalidate
+        >
+
+          <div class="card-heading">
+
+            <div>
+              <span>Delivery</span>
+              <h2>Customer information</h2>
+            </div>
+
+            <i class="fa-solid fa-lock"></i>
+
+          </div>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label for="firstName">First name</label>
+
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                autocomplete="given-name"
+                maxlength="50"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last name</label>
+
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                autocomplete="family-name"
+                maxlength="50"
+                required
+              >
+            </div>
+
+            <div class="form-group full-width">
+              <label for="email">Email address</label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                maxlength="100"
+                required
+              >
+            </div>
+
+            <div class="form-group full-width">
+              <label for="phone">Phone number</label>
+
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                autocomplete="tel"
+                placeholder="+90 5XX XXX XX XX"
+                maxlength="25"
+                required
+              >
+            </div>
+
+            <div class="form-group full-width">
+              <label for="identityNumber">
+                Identity number
+              </label>
+
+              <input
+                type="text"
+                id="identityNumber"
+                name="identityNumber"
+                inputmode="numeric"
+                minlength="5"
+                maxlength="20"
+                required
+              >
+
+              <small>
+                Required by the payment provider for transaction
+                processing.
+              </small>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="address">Delivery address</label>
+
+              <textarea
+                id="address"
+                name="address"
+                autocomplete="street-address"
+                maxlength="250"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="city">City</label>
+
+              <input
+                type="text"
+                id="city"
+                name="city"
+                autocomplete="address-level2"
+                maxlength="80"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="zipCode">Postal code</label>
+
+              <input
+                type="text"
+                id="zipCode"
+                name="zipCode"
+                autocomplete="postal-code"
+                maxlength="20"
+                required
+              >
+            </div>
+
+            <div class="form-group full-width">
+              <label for="country">Country</label>
+
+              <select
+                id="country"
+                name="country"
+                autocomplete="country-name"
+                required
+              >
+                <option value="">Select country</option>
+                <option value="Türkiye">Türkiye</option>
+                <option value="United Kingdom">
+                  United Kingdom
+                </option>
+                <option value="Germany">Germany</option>
+                <option value="France">France</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+          </div>
+
+          <label class="terms-row">
+
+            <input
+              type="checkbox"
+              id="termsAccepted"
+              required
+            >
+
+            <span>
+              I confirm that my order and delivery details are
+              correct.
+            </span>
+
+          </label>
+
+          <div
+            id="checkoutError"
+            class="checkout-error"
+            role="alert"
+            hidden
+          ></div>
+
+          <button
+            type="submit"
+            id="checkoutButton"
+            class="checkout-button"
+          >
+            <span>Continue to secure payment</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <div class="secure-note">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <p>
+              You will be redirected to iyzico to complete
+              your card payment securely.
+            </p>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="cart.js"></script>
+
 </body>
 </html>
