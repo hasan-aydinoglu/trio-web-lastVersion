@@ -1,12 +1,13 @@
 {
   "name": "trio-payment-functions",
-  "description": "Firebase Cloud Functions for Trio iyzico payments",
+  "description": "Firebase Cloud Functions for Trio Stripe payments",
   "main": "index.js",
   "private": true,
   "engines": {
     "node": "20"
   },
   "scripts": {
+    "lint": "echo \"Lint skipped\"",
     "serve": "firebase emulators:start --only functions",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
@@ -15,6 +16,7 @@
     "cors": "^2.8.5",
     "firebase-admin": "^13.0.0",
     "firebase-functions": "^6.0.0",
-    "iyzipay": "^2.0.67"
+    "resend": "^6.18.1",
+    "stripe": "^22.3.2"
   }
 }

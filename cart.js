@@ -1,16 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   /*
-   * Firebase Functions deploy edildikten sonra adres genellikle:
-   *
-   * https://europe-west1-PROJECT_ID.cloudfunctions.net
-   *
-   * Senin proje adına göre:
+   * Firebase Stripe Checkout Function adresi.
    */
-  const FUNCTION_BASE_URL =
-    'https://europe-west1-trio-app-e3bea.cloudfunctions.net';
-
   const CHECKOUT_ENDPOINT =
-    `${FUNCTION_BASE_URL}/createIyzicoCheckout`;
+    'https://europe-west1-trio-app-e3bea.cloudfunctions.net/createStripeCheckout';
 
   const cartItemsElement = document.getElementById('cartItems');
   const emptyCartElement = document.getElementById('emptyCart');
@@ -31,9 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.getItem('trioCart')
       );
 
-      return Array.isArray(savedCart) ? savedCart : [];
+      return Array.isArray(savedCart)
+        ? savedCart
+        : [];
     } catch (error) {
-      console.error('Cart could not be read:', error);
+      console.error(
+        'Cart could not be read:',
+        error
+      );
+
       return [];
     }
   }
@@ -51,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function getTotalQuantity(cart) {
     return cart.reduce(
-      (total, item) => total + Number(item.quantity || 0),
+      (total, item) =>
+        total +
+        Number(item.quantity || 0),
       0
     );
   }
@@ -60,20 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const cart = getCart();
 
     const item = cart.find(
-      (cartItem) => cartItem.id === productId
+      (cartItem) =>
+        cartItem.id === productId
     );
 
     if (!item) {
       return;
     }
 
-    const newQuantity = Number(item.quantity || 1) + change;
+    const currentQuantity =
+      Number(item.quantity || 1);
+
+    const newQuantity =
+      currentQuantity + change;
 
     if (newQuantity < 1) {
       return;
     }
 
-    item.quantity = Math.min(10, newQuantity);
+    item.quantity =
+      Math.min(10, newQuantity);
 
     saveCart(cart);
     renderCart();
@@ -81,7 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function removeItem(productId) {
     const cart = getCart().filter(
-      (item) => item.id !== productId
+      (item) =>
+        item.id !== productId
     );
 
     saveCart(cart);
@@ -89,15 +97,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function createCartItem(item) {
-    const itemElement = document.createElement('article');
-    itemElement.className = 'cart-item';
+    const itemElement =
+      document.createElement('article');
 
-    const safeQuantity = Math.min(
-      10,
-      Math.max(1, Number(item.quantity || 1))
-    );
+    itemElement.className =
+      'cart-item';
 
-    const lineTotal = Number(item.price || 0) * safeQuantity;
+    const safeQuantity =
+      Math.min(
+        10,
+        Math.max(
+          1,
+          Number(item.quantity || 1)
+        )
+      );
+
+    const unitPrice =
+      Number(item.price || 15);
+
+    const lineTotal =
+      unitPrice * safeQuantity;
 
     itemElement.innerHTML = `
       <img
@@ -107,8 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
       >
 
       <div class="cart-item-info">
-        <h3>${item.name || 'Trio Classic Edition'}</h3>
-        <p>£${formatMoney(item.price || 15)} each</p>
+        <h3>
+          ${item.name || 'Trio Classic Edition'}
+        </h3>
+
+        <p>
+          £${formatMoney(unitPrice)} each
+        </p>
 
         <div class="quantity-control">
           <button
@@ -132,7 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
 
       <div class="cart-item-price">
-        <strong>£${formatMoney(lineTotal)}</strong>
+        <strong>
+          £${formatMoney(lineTotal)}
+        </strong>
 
         <button
           type="button"
@@ -147,21 +173,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     itemElement
       .querySelector('.decrease-item')
-      ?.addEventListener('click', () => {
-        updateQuantity(item.id, -1);
-      });
+      ?.addEventListener(
+        'click',
+        () => {
+          updateQuantity(
+            item.id,
+            -1
+          );
+        }
+      );
 
     itemElement
       .querySelector('.increase-item')
-      ?.addEventListener('click', () => {
-        updateQuantity(item.id, 1);
-      });
+      ?.addEventListener(
+        'click',
+        () => {
+          updateQuantity(
+            item.id,
+            1
+          );
+        }
+      );
 
     itemElement
       .querySelector('.remove-button')
-      ?.addEventListener('click', () => {
-        removeItem(item.id);
-      });
+      ?.addEventListener(
+        'click',
+        () => {
+          removeItem(item.id);
+        }
+      );
 
     return itemElement;
   }
@@ -175,7 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
       emptyCartElement.hidden = false;
       orderSummaryElement.hidden = true;
       checkoutForm.hidden = true;
-      cartItemCountElement.textContent = '0 items';
+
+      cartItemCountElement.textContent =
+        '0 items';
+
       return;
     }
 
@@ -184,30 +228,57 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutForm.hidden = false;
 
     cart.forEach((item) => {
-      cartItemsElement.appendChild(createCartItem(item));
+      cartItemsElement.appendChild(
+        createCartItem(item)
+      );
     });
 
-    const totalQuantity = getTotalQuantity(cart);
+    const totalQuantity =
+      getTotalQuantity(cart);
 
     /*
-     * Bu sadece ekranda göstermek içindir.
-     * Gerçek fiyat backend tarafından yeniden hesaplanır.
+     * Bu toplam yalnızca ekranda gösterilir.
+     * Gerçek ödeme tutarı Firebase backend
+     * tarafından güvenli şekilde hesaplanır.
      */
-    const subtotal = cart.reduce((total, item) => {
-      return total +
-        Number(item.price || 0) *
-        Number(item.quantity || 1);
-    }, 0);
+    const subtotal = cart.reduce(
+      (total, item) => {
+        const price =
+          Number(item.price || 15);
+
+        const quantity =
+          Math.min(
+            10,
+            Math.max(
+              1,
+              Number(item.quantity || 1)
+            )
+          );
+
+        return total +
+          price * quantity;
+      },
+      0
+    );
 
     cartItemCountElement.textContent =
-      `${totalQuantity} ${totalQuantity === 1 ? 'item' : 'items'}`;
+      `${totalQuantity} ${
+        totalQuantity === 1
+          ? 'item'
+          : 'items'
+      }`;
 
-    subtotalElement.textContent = formatMoney(subtotal);
-    grandTotalElement.textContent = formatMoney(subtotal);
+    subtotalElement.textContent =
+      formatMoney(subtotal);
+
+    grandTotalElement.textContent =
+      formatMoney(subtotal);
   }
 
   function showError(message) {
-    checkoutError.textContent = message;
+    checkoutError.textContent =
+      message;
+
     checkoutError.hidden = false;
 
     checkoutError.scrollIntoView({
@@ -221,141 +292,206 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutError.hidden = true;
   }
 
-  function setCheckoutLoading(isLoading) {
-    checkoutButton.disabled = isLoading;
+  function setCheckoutLoading(
+    isLoading
+  ) {
+    checkoutButton.disabled =
+      isLoading;
 
-    checkoutButton.innerHTML = isLoading
-      ? `
-        <span>Preparing secure payment...</span>
-        <i class="fa-solid fa-spinner fa-spin"></i>
-      `
-      : `
-        <span>Continue to secure payment</span>
-        <i class="fa-solid fa-arrow-right"></i>
-      `;
+    checkoutButton.innerHTML =
+      isLoading
+        ? `
+          <span>
+            Preparing secure payment...
+          </span>
+
+          <i
+            class="fa-solid fa-spinner fa-spin"
+          ></i>
+        `
+        : `
+          <span>
+            Continue to secure payment
+          </span>
+
+          <i
+            class="fa-solid fa-arrow-right"
+          ></i>
+        `;
   }
 
   function getCustomerData() {
     return {
       firstName:
-        document.getElementById('firstName').value.trim(),
+        document
+          .getElementById('firstName')
+          .value
+          .trim(),
 
       lastName:
-        document.getElementById('lastName').value.trim(),
+        document
+          .getElementById('lastName')
+          .value
+          .trim(),
 
       email:
-        document.getElementById('email').value.trim(),
+        document
+          .getElementById('email')
+          .value
+          .trim(),
 
       phone:
-        document.getElementById('phone').value.trim(),
-
-      identityNumber:
-        document.getElementById('identityNumber').value.trim(),
-
-      address:
-        document.getElementById('address').value.trim(),
-
-      city:
-        document.getElementById('city').value.trim(),
-
-      zipCode:
-        document.getElementById('zipCode').value.trim(),
-
-      country:
-        document.getElementById('country').value,
+        document
+          .getElementById('phone')
+          .value
+          .trim(),
     };
   }
 
-  checkoutForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    clearError();
+  checkoutForm.addEventListener(
+    'submit',
+    async (event) => {
+      event.preventDefault();
+      clearError();
 
-    const cart = getCart();
+      const cart = getCart();
 
-    if (cart.length === 0) {
-      showError('Your cart is empty.');
-      return;
-    }
-
-    if (!checkoutForm.checkValidity()) {
-      checkoutForm.reportValidity();
-      return;
-    }
-
-    const termsAccepted =
-      document.getElementById('termsAccepted').checked;
-
-    if (!termsAccepted) {
-      showError(
-        'Please confirm that your order details are correct.'
-      );
-      return;
-    }
-
-    const customer = getCustomerData();
-
-    const items = cart.map((item) => ({
-      id: item.id,
-      quantity: Number(item.quantity || 1),
-    }));
-
-    setCheckoutLoading(true);
-
-    try {
-      const response = await fetch(CHECKOUT_ENDPOINT, {
-        method: 'POST',
-
-        headers: {
-          'Content-Type': 'application/json',
-        },
-
-        body: JSON.stringify({
-          customer,
-          items,
-        }),
-      });
-
-      let result;
-
-      try {
-        result = await response.json();
-      } catch (jsonError) {
-        throw new Error(
-          'The payment server returned an invalid response.'
+      if (cart.length === 0) {
+        showError(
+          'Your cart is empty.'
         );
+
+        return;
       }
 
-      if (!response.ok) {
-        throw new Error(
-          result.message ||
-          result.errorMessage ||
-          'Payment could not be started.'
-        );
+      if (
+        !checkoutForm.checkValidity()
+      ) {
+        checkoutForm.reportValidity();
+        return;
       }
 
-      if (!result.paymentPageUrl) {
-        throw new Error(
-          'The secure payment page URL was not returned.'
+      const termsAccepted =
+        document
+          .getElementById(
+            'termsAccepted'
+          )
+          .checked;
+
+      if (!termsAccepted) {
+        showError(
+          'Please confirm that your order details are correct.'
         );
+
+        return;
       }
+
+      const customer =
+        getCustomerData();
 
       /*
-       * Sepeti burada silmiyoruz.
-       * Sepet yalnızca doğrulanmış başarılı ödemeden sonra
-       * success sayfasında temizlenecek.
+       * Stripe backend yalnızca ürün ID ve
+       * miktar bilgisini kullanır.
+       *
+       * Ürün ID mutlaka backend ile aynı olmalıdır:
+       * trio-classic
        */
-      window.location.assign(result.paymentPageUrl);
-    } catch (error) {
-      console.error('Checkout error:', error);
+      const items = cart.map(
+        (item) => ({
+          id:
+            item.id ||
+            'trio-classic',
 
-      showError(
-        error.message ||
-        'An unexpected payment error occurred.'
+          quantity:
+            Math.min(
+              10,
+              Math.max(
+                1,
+                Number(
+                  item.quantity || 1
+                )
+              )
+            ),
+        })
       );
 
-      setCheckoutLoading(false);
+      setCheckoutLoading(true);
+
+      try {
+        const response =
+          await fetch(
+            CHECKOUT_ENDPOINT,
+            {
+              method: 'POST',
+
+              headers: {
+                'Content-Type':
+                  'application/json',
+              },
+
+              body:
+                JSON.stringify({
+                  customer,
+                  items,
+                }),
+            }
+          );
+
+        let result;
+
+        try {
+          result =
+            await response.json();
+        } catch (jsonError) {
+          throw new Error(
+            'The payment server returned an invalid response.'
+          );
+        }
+
+        if (
+          !response.ok ||
+          !result.success
+        ) {
+          throw new Error(
+            result.message ||
+            result.errorMessage ||
+            'Payment could not be started.'
+          );
+        }
+
+        const checkoutUrl =
+          result.checkoutUrl ||
+          result.paymentPageUrl;
+
+        if (!checkoutUrl) {
+          throw new Error(
+            'The secure Stripe payment page URL was not returned.'
+          );
+        }
+
+        /*
+         * Sepeti burada silmiyoruz.
+         * Ödeme başarıyla tamamlandıktan sonra
+         * payment-success.html sayfasında silinecek.
+         */
+        window.location.assign(
+          checkoutUrl
+        );
+      } catch (error) {
+        console.error(
+          'Stripe checkout error:',
+          error
+        );
+
+        showError(
+          error.message ||
+          'An unexpected payment error occurred.'
+        );
+
+        setCheckoutLoading(false);
+      }
     }
-  });
+  );
 
   renderCart();
 });

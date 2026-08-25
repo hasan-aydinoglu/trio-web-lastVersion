@@ -14,26 +14,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const buyNowButton = document.getElementById('buyNowButton');
   const cartCountElement = document.getElementById('cart-count');
 
-  const cartNotification = document.getElementById('cartNotification');
-  const notificationMessage = document.getElementById(
-    'notificationMessage'
-  );
+  const cartNotification =
+    document.getElementById('cartNotification');
 
-  const mainProductImage = document.getElementById(
-    'mainProductImage'
-  );
+  const notificationMessage =
+    document.getElementById('notificationMessage');
 
-  const thumbnailButtons = document.querySelectorAll(
-    '.thumbnail-button'
-  );
+  const mainProductImage =
+    document.getElementById('mainProductImage');
 
-  const mobileMenuButton = document.getElementById(
-    'mobileMenuButton'
-  );
+  const thumbnailButtons =
+    document.querySelectorAll('.thumbnail-button');
 
-  const navigationLinks = document.getElementById(
-    'navigationLinks'
-  );
+  const mobileMenuButton =
+    document.getElementById('mobileMenuButton');
+
+  const navigationLinks =
+    document.getElementById('navigationLinks');
 
   let notificationTimeout;
 
@@ -43,9 +40,15 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.getItem('trioCart')
       );
 
-      return Array.isArray(savedCart) ? savedCart : [];
+      return Array.isArray(savedCart)
+        ? savedCart
+        : [];
     } catch (error) {
-      console.error('Cart could not be read:', error);
+      console.error(
+        'Cart could not be read:',
+        error
+      );
+
       return [];
     }
   }
@@ -60,13 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getQuantity() {
-    const quantity = Number(quantityInput?.value || 1);
+    const quantity =
+      Number(quantityInput?.value || 1);
 
     if (!Number.isInteger(quantity)) {
       return 1;
     }
 
-    return Math.min(10, Math.max(1, quantity));
+    return Math.min(
+      10,
+      Math.max(1, quantity)
+    );
   }
 
   function updateTotal() {
@@ -74,11 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const total = PRODUCT.price * quantity;
 
     if (quantityInput) {
-      quantityInput.value = String(quantity);
+      quantityInput.value =
+        String(quantity);
     }
 
     if (totalPriceElement) {
-      totalPriceElement.textContent = total.toFixed(2);
+      totalPriceElement.textContent =
+        total.toFixed(2);
     }
   }
 
@@ -86,12 +95,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const cart = getCart();
 
     const totalQuantity = cart.reduce(
-      (total, item) => total + Number(item.quantity || 0),
+      (total, item) =>
+        total +
+        Number(item.quantity || 0),
       0
     );
 
     if (cartCountElement) {
-      cartCountElement.textContent = String(totalQuantity);
+      cartCountElement.textContent =
+        String(totalQuantity);
     }
   }
 
@@ -99,14 +111,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const cart = getCart();
 
     const existingProduct = cart.find(
-      (item) => item.id === PRODUCT.id
+      (item) =>
+        item.id === PRODUCT.id
     );
 
     if (existingProduct) {
-      existingProduct.quantity = Math.min(
-        10,
-        Number(existingProduct.quantity || 0) + quantity
-      );
+      existingProduct.quantity =
+        Math.min(
+          10,
+          Number(
+            existingProduct.quantity || 0
+          ) + quantity
+        );
     } else {
       cart.push({
         id: PRODUCT.id,
@@ -121,7 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showNotification(quantity) {
-    if (!cartNotification || !notificationMessage) {
+    if (
+      !cartNotification ||
+      !notificationMessage
+    ) {
       return;
     }
 
@@ -132,82 +151,142 @@ document.addEventListener('DOMContentLoaded', () => {
 
     clearTimeout(notificationTimeout);
 
-    notificationTimeout = setTimeout(() => {
-      cartNotification.classList.remove('show');
-    }, 3000);
+    notificationTimeout =
+      setTimeout(() => {
+        cartNotification.classList.remove(
+          'show'
+        );
+      }, 3000);
   }
 
-  decreaseButton?.addEventListener('click', () => {
-    const currentQuantity = getQuantity();
+  decreaseButton?.addEventListener(
+    'click',
+    () => {
+      const currentQuantity =
+        getQuantity();
 
-    if (currentQuantity > 1) {
-      quantityInput.value = String(currentQuantity - 1);
-      updateTotal();
-    }
-  });
+      if (currentQuantity > 1) {
+        quantityInput.value =
+          String(
+            currentQuantity - 1
+          );
 
-  increaseButton?.addEventListener('click', () => {
-    const currentQuantity = getQuantity();
-
-    if (currentQuantity < 10) {
-      quantityInput.value = String(currentQuantity + 1);
-      updateTotal();
-    }
-  });
-
-  addCartButton?.addEventListener('click', () => {
-    const quantity = getQuantity();
-
-    addProductToCart(quantity);
-    showNotification(quantity);
-  });
-
-  buyNowButton?.addEventListener('click', () => {
-    const quantity = getQuantity();
-
-    /*
-     * Buy Now replaces the current basket with the selected
-     * Trio product and sends the customer to checkout.
-     */
-    saveCart([
-      {
-        id: PRODUCT.id,
-        name: PRODUCT.name,
-        price: PRODUCT.price,
-        image: PRODUCT.image,
-        quantity,
-      },
-    ]);
-
-    window.location.href = 'cart.html';
-  });
-
-  thumbnailButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const image = button.dataset.image;
-
-      if (!image || !mainProductImage) {
-        return;
+        updateTotal();
       }
+    }
+  );
 
-      mainProductImage.src = image;
+  increaseButton?.addEventListener(
+    'click',
+    () => {
+      const currentQuantity =
+        getQuantity();
 
-      thumbnailButtons.forEach((thumbnail) => {
-        thumbnail.classList.remove('active');
-      });
+      if (currentQuantity < 10) {
+        quantityInput.value =
+          String(
+            currentQuantity + 1
+          );
 
-      button.classList.add('active');
-    });
-  });
+        updateTotal();
+      }
+    }
+  );
 
-  mobileMenuButton?.addEventListener('click', () => {
-    const isOpen = navigationLinks?.classList.toggle('open');
+  quantityInput?.addEventListener(
+    'input',
+    updateTotal
+  );
 
-    mobileMenuButton.setAttribute(
-      'aria-expanded',
-      String(Boolean(isOpen))
-    );
-  });
+  quantityInput?.addEventListener(
+    'blur',
+    updateTotal
+  );
+
+  addCartButton?.addEventListener(
+    'click',
+    () => {
+      const quantity =
+        getQuantity();
+
+      addProductToCart(quantity);
+      showNotification(quantity);
+    }
+  );
+
+  buyNowButton?.addEventListener(
+    'click',
+    () => {
+      const quantity =
+        getQuantity();
+
+      /*
+       * Buy Now mevcut sepeti seçilen ürünle değiştirir
+       * ve müşteriyi ödeme sayfasına gönderir.
+       */
+      saveCart([
+        {
+          id: PRODUCT.id,
+          name: PRODUCT.name,
+          price: PRODUCT.price,
+          image: PRODUCT.image,
+          quantity,
+        },
+      ]);
+
+      window.location.href =
+        'cart.html';
+    }
+  );
+
+  thumbnailButtons.forEach(
+    (button) => {
+      button.addEventListener(
+        'click',
+        () => {
+          const image =
+            button.dataset.image;
+
+          if (
+            !image ||
+            !mainProductImage
+          ) {
+            return;
+          }
+
+          mainProductImage.src =
+            image;
+
+          thumbnailButtons.forEach(
+            (thumbnail) => {
+              thumbnail.classList.remove(
+                'active'
+              );
+            }
+          );
+
+          button.classList.add(
+            'active'
+          );
+        }
+      );
+    }
+  );
+
+  mobileMenuButton?.addEventListener(
+    'click',
+    () => {
+      const isOpen =
+        navigationLinks?.classList.toggle(
+          'open'
+        );
+
+      mobileMenuButton.setAttribute(
+        'aria-expanded',
+        String(Boolean(isOpen))
+      );
+    }
+  );
 
   updateTotal();
   updateCartCount();
