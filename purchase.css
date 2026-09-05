@@ -418,6 +418,52 @@ a {
   transform: rotate(8deg);
 }
 
+
+.availability-notice {
+  width: 100%;
+  margin: 18px 0 20px;
+  padding: 15px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.035)
+    );
+  box-shadow: 0 16px 35px rgba(8, 24, 65, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #ffffff;
+  backdrop-filter: blur(14px);
+}
+
+.availability-notice > i {
+  flex: 0 0 auto;
+  color: var(--orange-light);
+  font-size: 1.05rem;
+}
+
+.availability-notice > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.availability-notice strong {
+  color: #ffffff;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.availability-notice span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
 .product-thumbnails {
   margin-top: 18px;
   display: flex;
@@ -1100,6 +1146,21 @@ a {
   .card-three {
     right: 28px;
     bottom: 55px;
+  }
+
+
+  .availability-notice {
+    padding: 13px 14px;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .availability-notice strong {
+    font-size: 0.8rem;
+  }
+
+  .availability-notice span {
+    font-size: 0.72rem;
   }
 
   .thumbnail-button {
